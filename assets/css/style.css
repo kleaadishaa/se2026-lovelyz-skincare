@@ -1,0 +1,1113 @@
+* {
+    margin: 0;
+}
+.navbar {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0;
+    width: 100%;
+    height: 60px;
+    z-index: 99999 !important;
+    background: rgba(0, 0, 0, 0.16);
+    backdrop-filter: blur(0px);
+    -webkit-backdrop-filter: blur(0px);
+}
+
+.navbar-nav .nav-item {
+    padding-left: 1rem;
+}
+
+.title {
+    font-weight: 500;
+}
+
+.navbar-nav a {
+    color: #fff;
+    font-size: 1.2rem;
+}
+.navbar-nav a:hover {
+    transition: all 0.5s ease;
+}
+
+.hero {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+}
+.hero-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+.hero-text {
+    position: absolute;
+    color: #fff;
+}
+
+.videoBackground,
+.videoWrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    z-index: -1;
+    transform: translateZ(0);
+}
+
+.videoWrapper video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    will-change: transform;
+    position: fixed;
+}
+
+.videoWrapper::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.45);
+}
+
+.videoContent {
+    position: absolute;
+    top: 35%;
+    left: 2%;
+    z-index: 10;
+    color: #F1EBE7;
+}
+
+.videoContent h2 {
+    font-size: 3rem; 
+    line-height: 1.2;
+    letter-spacing: 1px;
+    cursor: pointer;
+    position: relative;
+    padding-left: 20px;
+    transition: transform 0.3s ease;
+    font-weight: 300;
+}
+
+.videoContent h2::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%) scaleY(0);
+    transform-origin: center top;
+    width: 4px;
+    height: 100%;
+    background-color: #F1EBE7;
+    transition: transform 0.3s ease;
+}
+
+.videoContent h2:hover::before {
+    transform: translateY(-50%) scaleY(1);
+}
+
+.videoContent h2:hover {
+    transform: translateX(10px);
+}
+
+.agencyText {
+    color: #F1EBE7;
+    position: absolute;
+    top: 85%;
+    left: 76%;
+    z-index: 10;
+}
+
+.agencyText p {
+    font-size: 1.3rem;
+    line-height: 1.2;
+    letter-spacing: 1px;
+    font-weight: 300;
+}
+
+section {
+    position: relative;
+    z-index: 1;
+}
+
+.button {
+  line-height: 1;
+  text-decoration: none;
+  display: inline-flex;
+  border: none;
+  cursor: pointer;
+  align-items: center;
+  gap: 0.75rem;
+  background-color: #fff;
+  color: #daaf8d;
+  border-radius: 10rem;
+  font-weight: 600;
+  padding: 0.75rem 1.5rem;
+  padding-left: 20px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: background-color 0.3s;
+}
+.button__icon-wrapper {
+  flex-shrink: 0;
+  width: 25px;
+  height: 25px;
+  position: relative;
+  color: #fff;
+  background-color: #daaf8d;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+}
+.button:hover {
+  background-color: #daaf8d;
+  border: 1px solid #fff;
+  color: #fff;
+}
+.button:hover .button__icon-wrapper {
+    color: #fff;
+}
+.button__icon-svg--copy {
+  position: absolute;
+  transform: translate(-150%, 150%);
+}
+.button:hover .button__icon-svg:first-child {
+  transition: transform 0.3s ease-in-out;
+  transform: translate(150%, -150%);
+}
+.button:hover .button__icon-svg--copy {
+  transition: transform 0.3s ease-in-out 0.1s;
+  transform: translate(0);
+}
+
+#cleansers, #treatment, #suncream, #masks, #ad1, #ad2, #reviews, #contact {
+    width: 100%;
+    height: 100vh;
+}
+#footer {
+    width: 100%;
+    height: 50vh;  
+}
+
+.cleansersDiv {
+    padding: 4rem;
+}
+.cleanserIntro h2 {
+    font-size: 4rem;
+    font-weight: 500;
+}
+.cleanserIntro .txt1 {
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+.cleanserIntro .txt2 {
+    font-size: 1.1rem;
+    font-weight: 300;
+}
+
+.cleanserItems {
+    position: relative;
+}
+.owl-carousel .item {
+    display: flex;
+    justify-content: center;
+}
+.owl-carousel .card {
+    width: 100%;
+    max-width: 280px;
+    margin: 0 auto;
+    border: none;
+}
+
+.owl-carousel .card img {
+    height: 350px; 
+    width: 100%;
+    object-fit: cover;
+}
+
+.card-title, .card-text {
+    padding-left: 6px;
+}
+.card-title {
+    text-wrap: nowrap;
+}
+.card-text {
+    font-weight: 300;
+}
+
+.cta {
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+.cta span {
+  padding-bottom: 7px;
+  letter-spacing: 3px;
+  font-size: 14px;
+  padding-right: 15px;
+  text-transform: uppercase;
+}
+.cta svg {
+  transform: translateX(-8px);
+  transition: all 0.3s ease;
+}
+.cta:hover svg {
+  transform: translateX(0);
+}
+.cta:active svg {
+  transform: scale(0.9);
+}
+.hover-underline-animation {
+  position: relative;
+  color: black;
+  padding-bottom: 20px;
+}
+.hover-underline-animation:after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  transform: scaleX(0);
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: #000000;
+  transform-origin: bottom right;
+  transition: transform 0.25s ease-out;
+}
+.cta:hover .hover-underline-animation:after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
+
+.hero-img2 {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(0.5);
+}
+.hero-text {
+    color: #fff;
+    padding: 4rem;
+}
+.hero-text p {
+    font-size: 1.2rem;
+}
+
+.treatmentDiv {
+    padding-top: 4rem;
+}
+.treatmentIcons img {
+    width: 8rem;
+    padding-bottom: 1rem;
+}
+
+.adDiv {
+    display: grid;
+    grid-template-columns: 40% 1fr;
+}
+
+.leftPart img {
+    width: 100%;
+    height: 100vh;
+    object-fit: cover;
+}
+.rightPart {
+    padding: 5rem;
+}
+.rightPart h4 {
+    font-weight: 300;
+    font-size: 2rem;
+}
+.rightPart h2 {
+    font-weight: 500;
+    font-size: 3rem;
+}
+.rightPart p {
+    font-weight: 200;
+    padding-top: 1.5rem;
+    font-size: 1.2rem;
+    width: 70%;
+}
+
+.fancy {
+ background-color: transparent;
+ border: 2px solid #000;
+ border-radius: 0;
+ box-sizing: border-box;
+ color: #fff;
+ cursor: pointer;
+ display: inline-block;
+ font-weight: 700;
+ letter-spacing: 0.05em;
+ margin: 0;
+ outline: none;
+ overflow: visible;
+ padding: 1.25em 2em;
+ position: relative;
+ text-align: center;
+ text-decoration: none;
+ text-transform: none;
+ transition: all 0.3s ease-in-out;
+ user-select: none;
+ font-size: 13px;
+ padding-top: 1.5rem;
+}
+
+.fancy::before {
+ content: " ";
+ width: 1.5625rem;
+ height: 2px;
+ background: black;
+ top: 50%;
+ left: 1.5em;
+ position: absolute;
+ transform: translateY(-50%);
+ transform-origin: center;
+ transition: background 0.3s linear, width 0.3s linear;
+}
+
+.fancy .text {
+ font-size: 1.125em;
+ line-height: 1.33333em;
+ padding-left: 2em;
+ display: block;
+ text-align: left;
+ transition: all 0.3s ease-in-out;
+ text-transform: uppercase;
+ text-decoration: none;
+ color: black;
+}
+
+.fancy .top-key {
+ height: 2px;
+ width: 1.5625rem;
+ top: -2px;
+ left: 0.625rem;
+ position: absolute;
+ background: #e8e8e8;
+ transition: width 0.5s ease-out, left 0.3s ease-out;
+}
+
+.fancy .bottom-key-1 {
+ height: 2px;
+ width: 1.5625rem;
+ right: 1.875rem;
+ bottom: -2px;
+ position: absolute;
+ background: #e8e8e8;
+ transition: width 0.5s ease-out, right 0.3s ease-out;
+}
+
+.fancy .bottom-key-2 {
+ height: 2px;
+ width: 0.625rem;
+ right: 0.625rem;
+ bottom: -2px;
+ position: absolute;
+ background: #e8e8e8;
+ transition: width 0.5s ease-out, right 0.3s ease-out;
+}
+
+.fancy:hover {
+ color: white;
+ background: black;
+}
+
+.fancy:hover::before {
+ width: 0.9375rem;
+ background: white;
+}
+
+.fancy:hover .text {
+ color: white;
+ padding-left: 1.5em;
+}
+
+.fancy:hover .top-key {
+ left: -2px;
+ width: 0px;
+}
+
+.fancy:hover .bottom-key-1,
+ .fancy:hover .bottom-key-2 {
+ right: 0;
+ width: 0;
+}
+
+.projectsIntro h2 {
+    padding: 4rem 4rem 0 4rem;
+    font-size: 3rem;
+    font-weight: 200;
+}
+.reviewContent {
+    height: 100vh;
+    width: 100%;
+    padding: 3rem;
+    display: grid;
+    grid-template-columns: 35% 1fr;
+    align-items: stretch;
+}
+.reviewInfo {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+.reviewImg {
+    height: 100%;
+    width: 100%;
+}
+
+.reviewImg img {
+    height: 70%;
+    width: 80%;
+    object-fit: cover;
+    display: block;
+}
+.reviewIntro h2 {
+    font-size: 3rem;
+    font-weight: 500;
+}
+.reviewText {
+    display: grid;
+    grid-template-columns: 60% 1fr;
+    padding-top: 2rem;
+}
+.reviewText .reviewLeft p {
+    font-size: 1.1rem;
+    color: #5d5d5d;
+}
+.reviewText .reviewRight  {
+    padding-left: 2rem;
+}
+
+.project-controls {
+    display: flex;
+    gap: 12px;
+    margin-top: 2rem; 
+}
+
+.project-controls button {
+    width: 48px;
+    height: 48px;
+    border: 1px solid #000;
+    background: transparent;
+    color: #000;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.project-controls button:hover {
+    background: #000;
+    color: #fff;
+    transform: translateY(-2px);
+}
+
+.project-controls button:active {
+    transform: scale(0.95);
+}
+
+.project-controls button i {
+    pointer-events: none;
+}
+
+.footerSection {
+    padding: 4rem;
+    display: grid;
+    grid-template-rows: 80% 1fr;
+}
+
+.footerUp {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+}
+.footerUp h3 {
+    font-size: 3rem;
+    font-weight: 300;
+}
+.footerUp {
+    font-size: 1.1rem;
+    padding-top: 20px;
+}
+.footer1, .footer2, .footer3 {
+    text-align: center;
+}
+
+.footerDown {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding-top: 2rem;
+    font-size: 2rem;
+    font-weight: 300;
+}
+
+@media screen and (max-width: 480px) {
+
+    .navbar {
+        height: auto;
+        padding: 0.5rem 1rem;
+    }
+    .navbar-brand {
+        font-size: 1.2rem !important;
+    }
+    .navbar-nav .nav-item {
+        padding-left: 0;
+    }
+    .navbar-nav a {
+        font-size: 1rem;
+        color: #000;
+    }
+    .navbar-toggler-icon {
+        filter: invert(1);
+    }
+
+    .videoContent {
+        top: 30%;
+        left: 5%;
+    }
+    .videoContent h2 {
+        font-size: 1.8rem;
+    }
+    .agencyText {
+        top: auto;
+        bottom: 5%;
+        left: 5%;
+        right: 5%;
+    }
+    .agencyText p {
+        font-size: 0.9rem;
+    }
+
+    #cleansers, #treatment, #suncream, #masks, #ad1, #ad2, #reviews {
+        height: auto;
+        min-height: unset;
+    }
+    #footer {
+        height: auto;
+    }
+
+    .cleansersDiv {
+        padding: 2rem 1rem;
+    }
+    .cleanserIntro h2 {
+        font-size: 2rem;
+    }
+    .cleanserIntro .txt1 {
+        font-size: 1rem;
+    }
+    .cleanserIntro .txt2 {
+        font-size: 0.9rem;
+    }
+    .owl-carousel .card img {
+        height: 220px;
+    }
+    .owl-carousel .card {
+        max-width: 100%;
+    }
+    .card-title {
+        font-size: 0.9rem;
+        text-wrap: wrap;
+    }
+
+    #ad1 {
+        height: auto;
+    }
+    .hero-img2 {
+        position: relative;
+        height: 300px;
+    }
+    .hero-text {
+        position: relative;
+        padding: 1.5rem;
+        background: #1a1a1a;
+        color: #fff;
+    }
+    .hero-text p {
+        font-size: 0.9rem;
+        line-height: 1.6;
+    }
+
+    .treatmentDiv {
+        padding-top: 2rem;
+        padding-bottom: 2rem;
+    }
+    .treatmentDiv h2 {
+        font-size: 2rem !important;
+    }
+    .treatmentDiv .fs-5 {
+        font-size: 0.95rem !important;
+    }
+    .treatmentIcons img {
+        width: 4rem;
+    }
+    .treatmentIcons p {
+        font-size: 0.8rem;
+    }
+    .treatmentDiv p[style] {
+        max-width: 100% !important;
+        font-size: 0.9rem;
+    }
+
+    .adDiv {
+        grid-template-columns: 1fr;
+    }
+    .leftPart img {
+        height: 280px;
+    }
+    .rightPart {
+        padding: 2rem 1.5rem;
+    }
+    .rightPart h4 {
+        font-size: 1.2rem;
+    }
+    .rightPart h2 {
+        font-size: 1.8rem;
+    }
+    .rightPart p {
+        font-size: 0.95rem;
+        width: 100%;
+        padding-top: 1rem;
+    }
+
+    .reviewContent {
+        grid-template-columns: 1fr;
+        height: auto;
+        padding: 1.5rem;
+        gap: 1.5rem;
+    }
+    .reviewImg img {
+        width: 100%;
+        height: 250px;
+    }
+    .reviewIntro h2 {
+        font-size: 1.5rem;
+    }
+    .reviewText {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    .reviewText .reviewRight {
+        padding-left: 0;
+    }
+    .reviewText .reviewLeft p {
+        font-size: 0.9rem;
+    }
+    .projectsIntro h2 {
+        padding: 2rem 1.5rem 0;
+        font-size: 2rem;
+    }
+
+    .footerSection {
+        padding: 2rem 1.5rem;
+        grid-template-rows: auto auto;
+    }
+    .footerUp {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        text-align: center;
+    }
+    .footerUp h3 {
+        font-size: 1.8rem;
+    }
+    .footerDown {
+        font-size: 1rem;
+        padding-top: 1.5rem;
+        text-align: center;
+    }
+}
+
+@media screen and (min-width: 481px) and (max-width: 767px) {
+
+    .navbar {
+        height: auto;
+        padding: 0.5rem 1.2rem;
+    }
+    .navbar-brand {
+        font-size: 1.4rem !important;
+    }
+    .navbar-nav a {
+        color: #000;
+        font-size: 1rem;
+    }
+    .navbar-toggler-icon {
+        filter: invert(1);
+    }
+
+    .videoContent {
+        top: 32%;
+        left: 5%;
+    }
+    .videoContent h2 {
+        font-size: 2.2rem;
+    }
+    .agencyText {
+        top: auto;
+        bottom: 5%;
+        left: 5%;
+        right: 5%;
+    }
+    .agencyText p {
+        font-size: 1rem;
+    }
+
+    #cleansers, #treatment, #suncream, #masks, #ad1, #ad2, #reviews {
+        height: auto;
+    }
+    #footer {
+        height: auto;
+    }
+
+    .cleansersDiv {
+        padding: 2.5rem 1.5rem;
+    }
+    .cleanserIntro h2 {
+        font-size: 2.5rem;
+    }
+    .cleanserIntro .txt1 {
+        font-size: 1.05rem;
+    }
+    .owl-carousel .card img {
+        height: 260px;
+    }
+    .card-title {
+        text-wrap: wrap;
+        font-size: 0.95rem;
+    }
+
+    .hero-img2 {
+        position: relative;
+        height: 350px;
+    }
+    .hero-text {
+        position: relative;
+        padding: 2rem;
+        background: #1a1a1a;
+    }
+    .hero-text p {
+        font-size: 0.95rem;
+    }
+
+    .treatmentDiv {
+        padding: 2.5rem 1rem;
+    }
+    .treatmentIcons img {
+        width: 5rem;
+    }
+    .treatmentDiv p[style] {
+        max-width: 90% !important;
+        font-size: 0.95rem;
+    }
+
+    .adDiv {
+        grid-template-columns: 1fr;
+    }
+    .leftPart img {
+        height: 350px;
+    }
+    .rightPart {
+        padding: 2.5rem 2rem;
+    }
+    .rightPart h4 {
+        font-size: 1.4rem;
+    }
+    .rightPart h2 {
+        font-size: 2.2rem;
+    }
+    .rightPart p {
+        width: 90%;
+        font-size: 1rem;
+    }
+
+    .reviewContent {
+        grid-template-columns: 1fr;
+        height: auto;
+        padding: 2rem;
+        gap: 2rem;
+    }
+    .reviewImg img {
+        width: 100%;
+        height: 300px;
+    }
+    .reviewIntro h2 {
+        font-size: 1.8rem;
+    }
+    .reviewText {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    .reviewText .reviewRight {
+        padding-left: 0;
+    }
+    .projectsIntro h2 {
+        padding: 2.5rem 2rem 0;
+        font-size: 2.2rem;
+    }
+
+    .footerSection {
+        padding: 2.5rem 2rem;
+    }
+    .footerUp {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        text-align: center;
+    }
+    .footerUp h3 {
+        font-size: 2rem;
+    }
+    .footerDown {
+        font-size: 1.2rem;
+        padding-top: 1.5rem;
+    }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+
+    .navbar {
+        height: 60px;
+    }
+    .navbar-brand {
+        font-size: 1.5rem !important;
+    }
+    .navbar-nav a {
+        font-size: 1rem;
+        color: #fff;
+    }
+    .navbar-nav .nav-item {
+        padding-left: 0.5rem;
+    }
+
+    .videoContent {
+        top: 33%;
+        left: 4%;
+    }
+    .videoContent h2 {
+        font-size: 2.5rem;
+    }
+    .agencyText {
+        top: 80%;
+        left: 55%;
+    }
+    .agencyText p {
+        font-size: 1rem;
+    }
+
+    #cleansers, #treatment, #suncream, #masks, #ad1, #ad2, #reviews {
+        height: auto;
+    }
+    #footer {
+        height: auto;
+    }
+
+    .cleansersDiv {
+        padding: 3rem 2rem;
+    }
+    .cleanserIntro h2 {
+        font-size: 3rem;
+    }
+    .owl-carousel .card img {
+        height: 280px;
+    }
+    .card-title {
+        text-wrap: wrap;
+        font-size: 0.9rem;
+    }
+
+    #ad1 {
+        height: auto;
+    }
+    .hero-img2 {
+        position: relative;
+        height: 400px;
+    }
+    .hero-text {
+        position: relative;
+        padding: 2.5rem;
+        background: #1a1a1a;
+    }
+    .hero-text p {
+        font-size: 1rem;
+    }
+
+    .treatmentDiv {
+        padding: 3rem 1.5rem;
+    }
+    .treatmentIcons img {
+        width: 6rem;
+    }
+    .treatmentDiv p[style] {
+        max-width: 85% !important;
+        font-size: 1rem;
+    }
+
+    .adDiv {
+        grid-template-columns: 45% 1fr;
+    }
+    .leftPart img {
+        height: 100%;
+        min-height: 500px;
+    }
+    .rightPart {
+        padding: 3rem 2rem;
+    }
+    .rightPart h4 {
+        font-size: 1.5rem;
+    }
+    .rightPart h2 {
+        font-size: 2.2rem;
+    }
+    .rightPart p {
+        width: 95%;
+        font-size: 1rem;
+    }
+
+    .reviewContent {
+        grid-template-columns: 40% 1fr;
+        height: auto;
+        padding: 2.5rem;
+        gap: 1.5rem;
+    }
+    .reviewImg img {
+        width: 100%;
+        height: 380px;
+    }
+    .reviewIntro h2 {
+        font-size: 2rem;
+    }
+    .reviewText {
+        grid-template-columns: 65% 1fr;
+    }
+    .projectsIntro h2 {
+        padding: 3rem 2.5rem 0;
+        font-size: 2.5rem;
+    }
+
+    .footerSection {
+        padding: 3rem 2rem;
+    }
+    .footerUp {
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+    }
+    .footer3 {
+        grid-column: 1 / -1;
+    }
+    .footerUp h3 {
+        font-size: 2rem;
+    }
+    .footerDown {
+        font-size: 1.2rem;
+        padding-top: 1.5rem;
+    }
+}
+
+@media screen and (min-width: 1025px) and (max-width: 1279px) {
+
+    /* --- HERO --- */
+    .videoContent h2 {
+        font-size: 2.8rem;
+    }
+    .agencyText {
+        top: 82%;
+        left: 70%;
+    }
+    .agencyText p {
+        font-size: 1.1rem;
+    }
+
+    #cleansers, #treatment, #suncream, #masks {
+        height: auto;
+    }
+    #ad1, #ad2 {
+        height: auto;
+    }
+    #footer {
+        height: auto;
+    }
+
+    .cleansersDiv {
+        padding: 3.5rem;
+    }
+    .cleanserIntro h2 {
+        font-size: 3.5rem;
+    }
+    .owl-carousel .card img {
+        height: 300px;
+    }
+
+    .hero-text {
+        top: 10%;
+        padding: 3rem;
+    }
+    .hero-text p {
+        font-size: 1.05rem;
+    }
+
+    .treatmentIcons img {
+        width: 7rem;
+    }
+
+    .adDiv {
+        grid-template-columns: 40% 1fr;
+    }
+    .rightPart {
+        padding: 4rem 3rem;
+    }
+    .rightPart h2 {
+        font-size: 2.5rem;
+    }
+    .rightPart p {
+        width: 85%;
+    }
+
+    .reviewContent {
+        padding: 2.5rem 3rem;
+    }
+    .reviewIntro h2 {
+        font-size: 2.5rem;
+    }
+
+    .footerSection {
+        padding: 3.5rem;
+    }
+    .footerUp h3 {
+        font-size: 2.5rem;
+    }
+    .footerDown {
+        font-size: 1.5rem;
+    }
+}
+
+@media screen and (min-width: 1280px) {
+    .videoContent h2 {
+        font-size: 3.5rem;
+    }
+    .agencyText {
+        top: 85%;
+        left: 76%;
+    }
+
+    .cleanserIntro h2 {
+        font-size: 4rem;
+    }
+
+    .rightPart h2 {
+        font-size: 3rem;
+    }
+
+    .footerUp h3 {
+        font-size: 3rem;
+    }
+
+    .footerDown {
+        font-size: 2rem;
+    }
+}
