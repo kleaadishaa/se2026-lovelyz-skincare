@@ -1,10 +1,10 @@
 <?php
-/*
+/*Vendosini vete sic e keni bere emrin e db*/
 $host ='localhost';
-$dbname = 'shop';
+$dbname = '';
 $dbusername = 'root';
 $dbpassword = '';
-*/
+
 try {
     $pdo = new PDO("mysql:host=$host;dbname=$dbname", $dbusername,
      $dbpassword);
