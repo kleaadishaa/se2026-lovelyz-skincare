@@ -1,58 +1,94 @@
 <?php
-include '../includes/dbh.inc.php';
+include '../../includes/dbh.inc.php';
+include '../../includes/auth_check.inc.php';
 header('Content-Type: application/json');
 
-$data = json_decode(file_get_contents("php://input"));
-$user_id = $data->user_id;
-$products = $data->products; 
+$user_id  = authenticate($pdo);
+$data     = json_decode(file_get_contents("php://input"));
 
-if (!$user_id || empty($products)) {
-    echo json_encode(["success" => false, "message" => "Të dhëna të gabuara"]);
-    exit;
+if ($data === null) {
+    sendResponse(false, "Body i pavlefshëm.", 400);
+}
+
+$products = isset($data->products) ? $data->products : [];
+
+if (empty($products)) {
+    sendResponse(false, "Lista e produkteve është bosh.", 400);
+}
+
+foreach ($products as $p) {
+    if (
+        !isset($p->product_id, $p->quantity)
+        || (int)$p->product_id <= 0
+        || (int)$p->quantity   <= 0
+    ) {
+        sendResponse(false, "Produkt i pavlefshëm.", 400);
+    }
 }
 
 try {
     $pdo->beginTransaction();
-    //  Marrja e Detajeve të Produkteve
-    $product_ids = array_map(fn($p) => intval($p->product_id), $products);
-    $ids_string = implode(',', $product_ids);
 
-    $res = $pdo->query("SELECT id, name, price FROM products WHERE id IN ($ids_string)");
+    $product_ids  = array_map(fn($p) => (int)$p->product_id, $products);
+    $placeholders = implode(',', array_fill(0, count($product_ids), '?'));
+
+    $stmt = $pdo->prepare(
+        "SELECT id, name, price FROM products 
+         WHERE id IN ($placeholders)"
+    );
+    $stmt->execute($product_ids);
+
     $product_lookup = [];
-    
-    while ($row = $res->fetch(PDO::FETCH_ASSOC)) {
+    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
         $product_lookup[$row['id']] = $row;
     }
 
-    // Llogaritja e Totalit
-    $total = 0;
-    foreach ($products as $p) {
-        $total += $product_lookup[$p->product_id]['price'] * $p->quantity;
+    // Kontrollo që të gjithë produktet ekzistojnë
+    foreach ($product_ids as $pid) {
+        if (!isset($product_lookup[$pid])) {
+            $pdo->rollBack();
+            sendResponse(false, "Produkti me ID $pid nuk ekziston.", 404);
+        }
     }
 
-    // INSERT-i i Porosisë
-    $stmt = $pdo->prepare("INSERT INTO orders (user_id, status, total_price) VALUES (?, 'pending', ?)");
+    // Llogarit totalin
+    $total = 0;
+    foreach ($products as $p) {
+        $total += $product_lookup[(int)$p->product_id]['price']
+            * (int)$p->quantity;
+    }
+
+    // INSERT porosia
+    $stmt = $pdo->prepare(
+        "INSERT INTO orders (user_id, status, total_price) 
+         VALUES (?, 'pending', ?)"
+    );
     $stmt->execute([$user_id, $total]);
-    
     $order_id = $pdo->lastInsertId();
 
-    $stmt_detail = $pdo->prepare("INSERT INTO order_details (order_id, product_id, product_name, price, quantity) VALUES (?, ?, ?, ?, ?)");
-    
+    // INSERT detajet
+    $stmt_detail = $pdo->prepare(
+        "INSERT INTO order_details 
+            (order_id, product_id, product_name, price, quantity)
+         VALUES (?, ?, ?, ?, ?)"
+    );
     foreach ($products as $p) {
-        $p_id = $p->product_id;
-        $name = $product_lookup[$p_id]['name'];
-        $price = $product_lookup[$p_id]['price'];
-        $qty = $p->quantity;
-        
-        $stmt_detail->execute([$order_id, $p_id, $name, $price, $qty]);
+        $pid = (int)$p->product_id;
+        $stmt_detail->execute([
+            $order_id,
+            $pid,
+            $product_lookup[$pid]['name'],
+            $product_lookup[$pid]['price'],
+            (int)$p->quantity
+        ]);
     }
 
     $pdo->commit();
-    echo json_encode(["success" => true, "order_id" => $order_id]);
-
+    sendResponse(true, "Porosia u krijua.", 201, [
+        "order_id" => $order_id,
+        "total"    => $total
+    ]);
 } catch (Exception $e) {
-    if ($pdo->inTransaction()) {
-        $pdo->rollBack();
-    }
-    echo json_encode(["success" => false, "message" => $e->getMessage()]);
+    if ($pdo->inTransaction()) $pdo->rollBack();
+    sendResponse(false, "Gabim i brendshëm.", 500);
 }
