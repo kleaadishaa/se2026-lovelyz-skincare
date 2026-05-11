@@ -39,7 +39,7 @@ $email = $_POST["email"];
 
     create_user($pdo, $pwd, $username, $email);
 
-    header("Location: ../index.php?signup=success");
+    header("Location: ../index.html");
 
     $pdo = null;
     $stmt = null;
