@@ -22,14 +22,24 @@ function generateJWT($user) {
 function validateJWT() {
     global $jwt_secret;
 
-    $headers = getallheaders();
+    // Try multiple ways to get the Authorization header
+    $authHeader = null;
 
-    if (!isset($headers['Authorization'])) {
+    if (isset($_SERVER['HTTP_AUTHORIZATION'])) {
+        $authHeader = $_SERVER['HTTP_AUTHORIZATION'];
+    } elseif (isset($_SERVER['REDIRECT_HTTP_AUTHORIZATION'])) {
+        $authHeader = $_SERVER['REDIRECT_HTTP_AUTHORIZATION'];
+    } else {
+        $headers = getallheaders();
+        if (isset($headers['Authorization'])) {
+            $authHeader = $headers['Authorization'];
+        }
+    }
+
+    if (!$authHeader) {
         sendResponse(false, 'Missing token.', 401);
         exit;
     }
-
-    $authHeader = $headers['Authorization'];
 
     if (!preg_match('/Bearer\s(\S+)/', $authHeader, $matches)) {
         sendResponse(false, 'Invalid token format.', 401);

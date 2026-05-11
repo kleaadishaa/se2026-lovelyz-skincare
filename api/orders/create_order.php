@@ -1,19 +1,26 @@
 <?php
 include '../../includes/dbh.inc.php';
-include '../../includes/auth_check.inc.php';
-header('Content-Type: application/json');
+include '../../includes/jwt_helper.inc.php';
+include '../../includes/rate_limit.inc.php';
 
-$user_id  = authenticate($pdo);
-$data     = json_decode(file_get_contents("php://input"));
+header('Content-Type: application/json');
+rateLimit($pdo, 30, 60);
+$user_id = validateJWT();
+
+$data = json_decode(file_get_contents("php://input"));
 
 if ($data === null) {
-    sendResponse(false, "Body i pavlefshëm.", 400);
+    http_response_code(400);
+    echo json_encode(["success" => false, "message" => "Body i pavlefshëm."]);
+    exit;
 }
 
 $products = isset($data->products) ? $data->products : [];
 
 if (empty($products)) {
-    sendResponse(false, "Lista e produkteve është bosh.", 400);
+    http_response_code(400);
+    echo json_encode(["success" => false, "message" => "Lista e produkteve është bosh."]);
+    exit;
 }
 
 foreach ($products as $p) {
@@ -22,9 +29,15 @@ foreach ($products as $p) {
         || (int)$p->product_id <= 0
         || (int)$p->quantity   <= 0
     ) {
-        sendResponse(false, "Produkt i pavlefshëm.", 400);
+        http_response_code(400);
+        echo json_encode(["success" => false, "message" => "Produkt i pavlefshëm."]);
+        exit;
     }
 }
+
+$shipping_street  = isset($data->shipping_street)  ? trim($data->shipping_street)  : null;
+$shipping_city    = isset($data->shipping_city)    ? trim($data->shipping_city)    : null;
+$shipping_country = isset($data->shipping_country) ? trim($data->shipping_country) : null;
 
 try {
     $pdo->beginTransaction();
@@ -33,43 +46,39 @@ try {
     $placeholders = implode(',', array_fill(0, count($product_ids), '?'));
 
     $stmt = $pdo->prepare(
-        "SELECT id, name, price FROM products 
-         WHERE id IN ($placeholders)"
+        "SELECT product_id, name, price FROM products 
+         WHERE product_id IN ($placeholders)"
     );
     $stmt->execute($product_ids);
 
     $product_lookup = [];
     while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-        $product_lookup[$row['id']] = $row;
+        $product_lookup[$row['product_id']] = $row;
     }
 
-    // Kontrollo që të gjithë produktet ekzistojnë
     foreach ($product_ids as $pid) {
         if (!isset($product_lookup[$pid])) {
             $pdo->rollBack();
-            sendResponse(false, "Produkti me ID $pid nuk ekziston.", 404);
+            http_response_code(404);
+            echo json_encode(["success" => false, "message" => "Produkti me ID $pid nuk ekziston."]);
+            exit;
         }
     }
 
-    // Llogarit totalin
     $total = 0;
     foreach ($products as $p) {
-        $total += $product_lookup[(int)$p->product_id]['price']
-            * (int)$p->quantity;
+        $total += $product_lookup[(int)$p->product_id]['price'] * (int)$p->quantity;
     }
 
-    // INSERT porosia
     $stmt = $pdo->prepare(
-        "INSERT INTO orders (user_id, status, total_price) 
-         VALUES (?, 'pending', ?)"
+        "INSERT INTO orders (user_id, status, total_price, shipping_street, shipping_city, shipping_country) 
+         VALUES (?, 'pending', ?, ?, ?, ?)"
     );
-    $stmt->execute([$user_id, $total]);
+    $stmt->execute([$user_id, $total, $shipping_street, $shipping_city, $shipping_country]);
     $order_id = $pdo->lastInsertId();
 
-    // INSERT detajet
     $stmt_detail = $pdo->prepare(
-        "INSERT INTO order_details 
-            (order_id, product_id, product_name, price, quantity)
+        "INSERT INTO order_details (order_id, product_id, product_name, price, quantity)
          VALUES (?, ?, ?, ?, ?)"
     );
     foreach ($products as $p) {
@@ -84,11 +93,16 @@ try {
     }
 
     $pdo->commit();
-    sendResponse(true, "Porosia u krijua.", 201, [
+    http_response_code(201);
+    echo json_encode([
+        "success"  => true,
+        "message"  => "Porosia u krijua.",
         "order_id" => $order_id,
         "total"    => $total
     ]);
+
 } catch (Exception $e) {
     if ($pdo->inTransaction()) $pdo->rollBack();
-    sendResponse(false, "Gabim i brendshëm.", 500);
+    http_response_code(500);
+    echo json_encode(["success" => false, "message" => "Gabim i brendshëm."]);
 }

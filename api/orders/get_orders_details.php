@@ -1,30 +1,36 @@
 <?php
 include '../../includes/dbh.inc.php';
-include '../../includes/auth_check.inc.php';
+include '../../includes/jwt_helper.inc.php';
+include '../../includes/rate_limit.inc.php';
 header('Content-Type: application/json');
+rateLimit($pdo, 30, 60);
+$user_id = validateJWT();
 
-$user_id  = authenticate($pdo);
-$order_id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
+$order_id = isset($_GET['order_id']) ? (int)$_GET['order_id'] : 0;
 
 if ($order_id <= 0) {
-    sendResponse(false, "ID e pavlefshme.", 400);
+    http_response_code(400);
+    echo json_encode(["success" => false, "message" => "ID e pavlefshme."]);
+    exit;
 }
 
 try {
-    // Kontrollo që porosia i përket këtij useri
     $stmt = $pdo->prepare(
         "SELECT 
-            o.id, o.status, o.total_price, o.created_at,
-            u.first_name, u.last_name
+            o.order_id, o.status, o.total_price, o.created_at,
+            o.shipping_street, o.shipping_city, o.shipping_country,
+            u.username, u.email
          FROM orders o
          JOIN users u ON o.user_id = u.id
-         WHERE o.id = ? AND o.user_id = ?"
+         WHERE o.order_id = ? AND o.user_id = ?"
     );
     $stmt->execute([$order_id, $user_id]);
     $order = $stmt->fetch(PDO::FETCH_ASSOC);
 
     if (!$order) {
-        sendResponse(false, "Porosia nuk u gjet.", 404);
+        http_response_code(404);
+        echo json_encode(["success" => false, "message" => "Porosia nuk u gjet."]);
+        exit;
     }
 
     // Merr produktet e kësaj porosie
@@ -36,8 +42,9 @@ try {
     $stmt_d->execute([$order_id]);
     $order['products'] = $stmt_d->fetchAll(PDO::FETCH_ASSOC);
 
-    sendResponse(true, "OK", 200, ["data" => $order]);
+    echo json_encode(["success" => true, "message" => "OK", "data" => $order]);
 
 } catch (Exception $e) {
-    sendResponse(false, "Gabim gjatë leximit.", 500);
+    http_response_code(500);
+    echo json_encode(["success" => false, "message" => "Gabim gjatë leximit."]);
 }
