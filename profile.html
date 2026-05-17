@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile – Lovelyz Skincare</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" crossorigin="anonymous">
+    <style>
+        :root {
+            --cream: #f9f4ef;
+            --blush: #e8d5c4;
+            --rose: #c9897a;
+            --deep: #2c1f1a;
+            --muted: #7a6860;
+            --card-bg: #ffffff;
+            --border: #e2d4ca;
+            --success: #6aab8e;
+            --error: #c97a7a;
+        }
+
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            color: var(--deep);
+            min-height: 100vh;
+        }
+
+        nav {
+            background: var(--deep);
+            padding: 1rem 2.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        nav .brand {
+            font-size: 1.6rem;
+            font-weight: 600;
+            color: var(--cream);
+            text-decoration: none;
+        }
+
+        nav .nav-links a {
+            color: var(--blush);
+            text-decoration: none;
+            font-size: 0.78rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            margin-left: 2rem;
+            font-weight: 300;
+            transition: color 0.2s;
+        }
+
+        nav .nav-links a:hover { color: var(--cream); }
+
+        .page-header {
+            background: var(--deep);
+            padding: 3.5rem 2.5rem 2.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header-block {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+            display: flex;
+            align-items: center;
+            gap: 1.6rem;
+        }
+
+        .header-text .greeting {
+            font-size: 0.7rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--rose);
+            margin-bottom: 0.3rem;
+        }
+
+        .header-text .user-name {
+            font-size: clamp(1.6rem, 4vw, 2.4rem);
+            font-weight: 300;
+            color: var(--cream);
+            letter-spacing: 0.02em;
+        }
+
+        main {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 3rem 1.5rem 5rem;
+        }
+
+        .section-label {
+            font-size: 0.68rem;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: var(--rose);
+            margin-bottom: 1.8rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .section-label::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--border);
+        }
+
+        .profile-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 2px;
+            overflow: hidden;
+            margin-bottom: 2rem;
+            animation: fadeUp 0.45s ease both;
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(16px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        .field-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1.4rem 1.8rem;
+            border-bottom: 1px solid #f0e9e3;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .field-row:last-child { border-bottom: none; }
+
+        .field-left {
+            display: flex;
+            align-items: center;
+            gap: 1.2rem;
+            flex: 1;
+            min-width: 0;
+        }
+
+        .field-icon {
+            width: 38px; height: 38px;
+            border-radius: 50%;
+            background: var(--cream);
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--rose);
+            font-size: 0.85rem;
+            flex-shrink: 0;
+        }
+
+        .field-info { min-width: 0; }
+
+        .field-label {
+            font-size: 0.65rem;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--muted);
+            margin-bottom: 0.25rem;
+        }
+
+        .field-value {
+            font-size: 0.95rem;
+            font-weight: 400;
+            color: var(--deep);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .field-value.masked {
+            letter-spacing: 0.2em;
+            color: var(--muted);
+            font-size: 0.8rem;
+        }
+
+        .btn-edit {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-size: 0.7rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            font-weight: 400;
+            color: var(--rose);
+            background: none;
+            border: 1px solid var(--border);
+            border-radius: 2px;
+            padding: 0.4rem 0.9rem;
+            cursor: pointer;
+            transition: background 0.18s, color 0.18s, border-color 0.18s;
+            white-space: nowrap;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        .btn-edit:hover {
+            background: var(--rose);
+            color: var(--cream);
+            border-color: var(--rose);
+        }
+
+        .edit-form {
+            display: none;
+            padding: 1.4rem 1.8rem;
+            border-top: 1px solid var(--border);
+            background: #fdfaf7;
+            animation: fadeUp 0.3s ease both;
+        }
+
+        .edit-form.open { display: block; }
+
+        .form-group { margin-bottom: 1rem; }
+
+        .form-group label {
+            display: block;
+            font-size: 0.65rem;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--muted);
+            margin-bottom: 0.4rem;
+        }
+
+        .form-group input {
+            width: 100%;
+            max-width: 380px;
+            padding: 0.6rem 0.9rem;
+            border: 1px solid var(--border);
+            border-radius: 2px;
+            background: var(--card-bg);
+            font-size: 0.88rem;
+            font-family: 'Segoe UI', sans-serif;
+            color: var(--deep);
+            outline: none;
+            transition: border-color 0.18s;
+        }
+
+        .form-group input:focus { border-color: var(--rose); }
+
+        .form-actions {
+            display: flex;
+            gap: 0.7rem;
+            margin-top: 1.2rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-save {
+            font-size: 0.7rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            font-family: 'Segoe UI', sans-serif;
+            color: var(--cream);
+            background: var(--rose);
+            border: 1px solid var(--rose);
+            border-radius: 2px;
+            padding: 0.5rem 1.2rem;
+            cursor: pointer;
+            transition: opacity 0.18s;
+        }
+
+        .btn-save:hover { opacity: 0.85; }
+        .btn-save:disabled { opacity: 0.5; cursor: not-allowed; }
+
+        .btn-cancel {
+            font-size: 0.7rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            font-family: 'Segoe UI', sans-serif;
+            color: var(--muted);
+            background: none;
+            border: 1px solid var(--border);
+            border-radius: 2px;
+            padding: 0.5rem 1.2rem;
+            cursor: pointer;
+            transition: border-color 0.18s, color 0.18s;
+        }
+
+        .btn-cancel:hover { border-color: var(--muted); color: var(--deep); }
+
+        .form-msg {
+            font-size: 0.78rem;
+            padding: 0.3rem 0;
+            display: none;
+        }
+
+        .form-msg.success { color: var(--success); display: block; }
+        .form-msg.error   { color: var(--error);   display: block; }
+
+        .danger-card {
+            background: var(--card-bg);
+            border: 1px solid #e8b0b0;
+            border-radius: 2px;
+            padding: 1.6rem 1.8rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1rem;
+            animation: fadeUp 0.5s 0.1s ease both;
+        }
+
+        .danger-info h4 {
+            font-size: 0.88rem;
+            font-weight: 600;
+            color: var(--error);
+            margin-bottom: 0.3rem;
+        }
+
+        .danger-info p {
+            font-size: 0.78rem;
+            color: var(--muted);
+            font-weight: 300;
+        }
+
+        .btn-danger {
+            font-size: 0.7rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            font-family: 'Segoe UI', sans-serif;
+            color: var(--error);
+            background: none;
+            border: 1px solid var(--error);
+            border-radius: 2px;
+            padding: 0.5rem 1.2rem;
+            cursor: pointer;
+            transition: background 0.18s, color 0.18s;
+            white-space: nowrap;
+        }
+
+        .btn-danger:hover { background: var(--error); color: #fff; }
+
+        @media (max-width: 600px) {
+            nav { padding: 1rem 1.2rem; }
+            .nav-links { display: none; }
+            .page-header { padding: 2.5rem 1.2rem 2rem; }
+            main { padding: 2rem 1rem 4rem; }
+            .field-row { flex-direction: column; align-items: flex-start; }
+            .btn-edit { align-self: flex-end; }
+            .danger-card { flex-direction: column; align-items: flex-start; }
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <a class="brand" href="index.html">Lovelyz Skincare</a>
+</nav>
+
+<div class="page-header">
+    <div class="header-block">
+        <div class="header-text">
+            <p class="greeting">Your Profile</p>
+            <h1 class="user-name" id="display-name">—</h1>
+        </div>
+    </div>
+</div>
+
+<main>
+    <div id="main-content">
+    </div>
+</main>
+
+<script>
+    const token = localStorage.getItem('token');
+    if (!token) window.location.href = 'index.php';
+
+    const headers = {
+        'Authorization': 'Bearer ' + token,
+        'Content-Type': 'application/json'
+    };
+
+    let currentUsername = '';
+    let currentEmail = '';
+
+    async function loadUser() {
+        try {
+            const res = await fetch('api/clients/get_user.php', { headers });
+            const data = await res.json();
+
+            if (!data.success) {
+                if (res.status === 401) {
+                    localStorage.removeItem('token');
+                    window.location.href = 'index.php';
+                    return;
+                }
+                document.getElementById('main-content').innerHTML = '<p style="padding:2rem;color:var(--muted)">Could not load profile.</p>';
+                return;
+            }
+
+            const p = data.profile;
+            currentUsername = p.username;
+            currentEmail = p.email;
+
+            document.getElementById('display-name').textContent = p.username;
+
+            document.getElementById('main-content').innerHTML = `
+                <p class="section-label">Account Details</p>
+
+                <div class="profile-card">
+
+                    <div class="field-row">
+                        <div class="field-left">
+                            <div class="field-icon"><i class="fa-regular fa-user"></i></div>
+                            <div class="field-info">
+                                <p class="field-label">Username</p>
+                                <p class="field-value" id="val-username">${p.username}</p>
+                            </div>
+                        </div>
+                        <button class="btn-edit" onclick="toggleEdit('form-username', this)">
+                            <i class="fa-regular fa-pen-to-square"></i> Edit
+                        </button>
+                    </div>
+                    <div class="edit-form" id="form-username">
+                        <div class="form-group">
+                            <label for="input-username">New Username</label>
+                            <input type="text" id="input-username" value="${p.username}">
+                        </div>
+                        <div class="form-actions">
+                            <button class="btn-save" onclick="saveProfile('username')">Save</button>
+                            <button class="btn-cancel" onclick="toggleEdit('form-username', null)">Cancel</button>
+                            <span class="form-msg" id="msg-username"></span>
+                        </div>
+                    </div>
+
+                    <div class="field-row">
+                        <div class="field-left">
+                            <div class="field-icon"><i class="fa-regular fa-envelope"></i></div>
+                            <div class="field-info">
+                                <p class="field-label">Email Address</p>
+                                <p class="field-value" id="val-email">${p.email}</p>
+                            </div>
+                        </div>
+                        <button class="btn-edit" onclick="toggleEdit('form-email', this)">
+                            <i class="fa-regular fa-pen-to-square"></i> Edit
+                        </button>
+                    </div>
+                    <div class="edit-form" id="form-email">
+                        <div class="form-group">
+                            <label for="input-email">New Email Address</label>
+                            <input type="email" id="input-email" value="${p.email}">
+                        </div>
+                        <div class="form-actions">
+                            <button class="btn-save" onclick="saveProfile('email')">Save</button>
+                            <button class="btn-cancel" onclick="toggleEdit('form-email', null)">Cancel</button>
+                            <span class="form-msg" id="msg-email"></span>
+                        </div>
+                    </div>
+
+                    <div class="field-row">
+                        <div class="field-left">
+                            <div class="field-icon"><i class="fa-regular fa-lock"></i></div>
+                            <div class="field-info">
+                                <p class="field-label">Password</p>
+                                <p class="field-value masked">••••••••••••</p>
+                            </div>
+                        </div>
+                        <button class="btn-edit" onclick="toggleEdit('form-password', this)">
+                            <i class="fa-regular fa-pen-to-square"></i> Edit
+                        </button>
+                    </div>
+                    <div class="edit-form" id="form-password">
+                        <div class="form-group">
+                            <label for="input-old-pwd">Current Password</label>
+                            <input type="password" id="input-old-pwd" placeholder="Enter current password">
+                        </div>
+                        <div class="form-group">
+                            <label for="input-new-pwd">New Password</label>
+                            <input type="password" id="input-new-pwd" placeholder="Min. 8 characters">
+                        </div>
+                        <div class="form-group">
+                            <label for="input-confirm-pwd">Confirm New Password</label>
+                            <input type="password" id="input-confirm-pwd" placeholder="Repeat new password">
+                        </div>
+                        <div class="form-actions">
+                            <button class="btn-save" onclick="savePassword()">Save</button>
+                            <button class="btn-cancel" onclick="toggleEdit('form-password', null)">Cancel</button>
+                            <span class="form-msg" id="msg-password"></span>
+                        </div>
+                    </div>
+
+                </div>
+
+                <p class="section-label">Danger Zone</p>
+                <div class="danger-card">
+                    <div class="danger-info">
+                        <h4>Delete Account</h4>
+                        <p>Permanently delete your account. This cannot be undone. Accounts with pending orders cannot be deleted.</p>
+                    </div>
+                    <button class="btn-danger" onclick="deleteAccount()">Delete Account</button>
+                </div>
+            `;
+
+        } catch (err) {
+            document.getElementById('main-content').innerHTML = '<p style="padding:2rem;color:var(--muted)">Something went wrong.</p>';
+        }
+    }
+
+    function toggleEdit(formId, btn) {
+        const form = document.getElementById(formId);
+        const isOpen = form.classList.contains('open');
+        document.querySelectorAll('.edit-form').forEach(f => f.classList.remove('open'));
+        document.querySelectorAll('.btn-edit').forEach(b => b.innerHTML = '<i class="fa-regular fa-pen-to-square"></i> Edit');
+        document.querySelectorAll('.form-msg').forEach(m => { m.className = 'form-msg'; m.textContent = ''; });
+        if (!isOpen && btn) {
+            form.classList.add('open');
+            btn.innerHTML = '<i class="fa-solid fa-xmark"></i> Close';
+        }
+    }
+
+    function showMsg(id, text, type) {
+        const el = document.getElementById(id);
+        el.textContent = text;
+        el.className = 'form-msg ' + type;
+    }
+
+    async function saveProfile(field) {
+        const input = document.getElementById('input-' + field);
+        const value = input.value.trim();
+        const msgId = 'msg-' + field;
+
+        if (!value) {
+            showMsg(msgId, 'This field cannot be empty.', 'error');
+            return;
+        }
+
+        const body = field === 'username' ? { username: value } : { email: value };
+
+        const btn = input.closest('.edit-form').querySelector('.btn-save');
+        btn.disabled = true;
+        btn.textContent = 'Saving...';
+
+        try {
+            const res = await fetch('api/clients/update_profile.php', {
+                method: 'POST',
+                headers,
+                body: JSON.stringify(body)
+            });
+
+            const data = await res.json();
+
+            if (data.success) {
+                showMsg(msgId, 'Updated successfully!', 'success');
+                document.getElementById('val-' + field).textContent = value;
+                if (field === 'username') {
+                    document.getElementById('display-name').textContent = value;
+                }
+            } else {
+                showMsg(msgId, data.message || 'Update failed.', 'error');
+            }
+        } catch {
+            showMsg(msgId, 'Something went wrong.', 'error');
+        } finally {
+            btn.disabled = false;
+            btn.textContent = 'Save';
+        }
+    }
+
+    async function savePassword() {
+        const oldPwd     = document.getElementById('input-old-pwd').value;
+        const newPwd     = document.getElementById('input-new-pwd').value;
+        const confirmPwd = document.getElementById('input-confirm-pwd').value;
+        const msgId      = 'msg-password';
+
+        if (!oldPwd || !newPwd || !confirmPwd) {
+            showMsg(msgId, 'Please fill in all fields.', 'error');
+            return;
+        }
+
+        if (newPwd.length < 8) {
+            showMsg(msgId, 'New password must be at least 8 characters.', 'error');
+            return;
+        }
+
+        if (newPwd !== confirmPwd) {
+            showMsg(msgId, 'New passwords do not match.', 'error');
+            return;
+        }
+
+        const btn = document.querySelector('#form-password .btn-save');
+        btn.disabled = true;
+        btn.textContent = 'Saving...';
+
+        try {
+            const res = await fetch('api/clients/change_password.php', {
+                method: 'POST',
+                headers,
+                body: JSON.stringify({ old_password: oldPwd, new_password: newPwd })
+            });
+
+            const data = await res.json();
+
+            if (data.success) {
+                showMsg(msgId, 'Password changed successfully!', 'success');
+                document.getElementById('input-old-pwd').value = '';
+                document.getElementById('input-new-pwd').value = '';
+                document.getElementById('input-confirm-pwd').value = '';
+            } else {
+                showMsg(msgId, data.message || 'Password change failed.', 'error');
+            }
+        } catch {
+            showMsg(msgId, 'Something went wrong.', 'error');
+        } finally {
+            btn.disabled = false;
+            btn.textContent = 'Save';
+        }
+    }
+
+    async function deleteAccount() {
+        if (!confirm('Are you sure you want to delete your account? This cannot be undone.')) return;
+
+        try {
+            const res = await fetch('api/clients/delete_user.php', {
+                method: 'DELETE',
+                headers
+            });
+
+            const data = await res.json();
+
+            if (data.success) {
+                localStorage.removeItem('token');
+                alert('Your account has been deleted.');
+                window.location.href = 'index.php';
+            } else {
+                alert(data.message || 'Could not delete account.');
+            }
+        } catch {
+            alert('Something went wrong. Please try again.');
+        }
+    }
+
+    loadUser();
+</script>
+
+</body>
+</html>

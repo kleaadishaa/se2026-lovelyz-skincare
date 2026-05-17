@@ -70,5 +70,6 @@ $token = generateJWT($user);
  * STEP 9: Return success response
  */
 sendResponse(true, "Login successful", 200, [
-    "token" => $token
+    "token" => $token,
+    "role"  => $user['role']
 ]);

@@ -349,9 +349,8 @@ require_once 'includes/login_view.inc.php';
             </div>
             <form action="includes/login.inc.php" method="POST">
                 <div class="field">
-                    <label for="login-email">Username</label>
-                    <input type="text" id="login-email" name="username" placeholder="username" required>
-                    <i class="fa-regular fa-envelope field-icon"></i>
+                    <label for="login-email">Email</label>
+                    <input type="email" id="login-email" name="email" placeholder="you@example.com" required>
                 </div>
                 <div class="field">
                     <label for="login-pass">Password</label>
@@ -418,6 +417,32 @@ require_once 'includes/login_view.inc.php';
         btn.classList.add('active');
         document.getElementById('panel-' + name).classList.add('active');
     }
+
+    document.querySelector('#panel-login form').addEventListener('submit', async function(e) {
+        e.preventDefault();
+
+        const email = document.getElementById('login-email').value.trim();
+        const password = document.getElementById('login-pass').value.trim();
+
+        try {
+            const res = await fetch('includes/auth/login.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email, password })
+            });
+
+            const data = await res.json();
+
+            if (data.success) {
+                localStorage.setItem('token', data.token);
+                window.location.href = data.role === 'admin' ? 'admin.html' : 'index.html';
+            } else {
+                alert(data.message || 'Login failed.');
+            }
+        } catch (err) {
+            alert('Something went wrong. Please try again.');
+        }
+    });
 </script>
 
 </body>
