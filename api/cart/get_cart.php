@@ -7,7 +7,18 @@ rateLimit($pdo, 30, 60);
 $user_id = validateJWT();
 
 try {
-    $stmt = $pdo->prepare("SELECT * FROM cart WHERE user_id = ?");
+    $stmt = $pdo->prepare("
+SELECT 
+        c.product_id,
+        c.product_name,
+        c.price,
+        c.quantity,
+        p.image
+    FROM cart c
+    JOIN products p 
+        ON c.product_id = p.product_id
+    WHERE c.user_id = ?
+");
     $stmt->execute([$user_id]);
     $items = $stmt->fetchAll(PDO::FETCH_ASSOC);
 

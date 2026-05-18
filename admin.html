@@ -29,7 +29,7 @@
             display: flex;
         }
 
-        /* ── SIDEBAR ── */
+        /* ── Sidebar ── */
         .sidebar {
             width: var(--sidebar-w);
             background: var(--deep);
@@ -61,10 +61,7 @@
             margin-top: 0.2rem;
         }
 
-        .sidebar-nav {
-            padding: 1.5rem 0;
-            flex: 1;
-        }
+        .sidebar-nav { padding: 1.5rem 0; flex: 1; }
 
         .nav-label {
             font-size: 0.6rem;
@@ -90,44 +87,12 @@
             cursor: pointer;
         }
 
-        .nav-item:hover {
-            background: rgba(255,255,255,0.06);
-            color: var(--cream);
-        }
-
-        .nav-item.active {
-            background: rgba(201,137,122,0.15);
-            color: var(--rose);
-            border-left-color: var(--rose);
-        }
-
+        .nav-item:hover { background: rgba(255,255,255,0.06); color: var(--cream); }
+        .nav-item.active { background: rgba(201,137,122,0.15); color: var(--rose); border-left-color: var(--rose); }
         .nav-item i { width: 16px; text-align: center; font-size: 0.85rem; }
 
-        .sidebar-footer {
-            padding: 1.2rem 1.5rem;
-            border-top: 1px solid rgba(255,255,255,0.08);
-        }
-
-        .btn-back {
-            display: flex;
-            align-items: center;
-            gap: 0.6rem;
-            font-size: 0.78rem;
-            color: rgba(255,255,255,0.4);
-            text-decoration: none;
-            transition: color 0.18s;
-            letter-spacing: 0.06em;
-        }
-
-        .btn-back:hover { color: var(--cream); }
-
-        /* ── MAIN ── */
-        .main {
-            margin-left: var(--sidebar-w);
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-        }
+        /* ── Main ── */
+        .main { margin-left: var(--sidebar-w); flex: 1; display: flex; flex-direction: column; }
 
         .topbar {
             background: var(--card-bg);
@@ -135,28 +100,14 @@
             padding: 1rem 2rem;
         }
 
-        .topbar-title {
-            font-size: 1rem;
-            font-weight: 600;
-            color: var(--deep);
-        }
+        .topbar-title { font-size: 1rem; font-weight: 600; color: var(--deep); }
+        .topbar-sub { font-size: 0.75rem; color: var(--muted); margin-top: 0.1rem; }
 
-        .topbar-sub {
-            font-size: 0.75rem;
-            color: var(--muted);
-            margin-top: 0.1rem;
-        }
+        .content { padding: 2rem; flex: 1; }
 
-        .content {
-            padding: 2rem;
-            flex: 1;
-        }
-
-        /* ── PANELS ── */
         .panel { display: none; }
         .panel.active { display: block; }
 
-        /* ── SECTION LABEL ── */
         .section-label {
             font-size: 0.68rem;
             letter-spacing: 0.22em;
@@ -168,14 +119,9 @@
             gap: 1rem;
         }
 
-        .section-label::after {
-            content: '';
-            flex: 1;
-            height: 1px;
-            background: var(--border);
-        }
+        .section-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
 
-        /* ── FORM CARD ── */
+        /* ── Cards ── */
         .form-card {
             background: var(--card-bg);
             border: 1px solid var(--border);
@@ -184,18 +130,18 @@
             max-width: 680px;
         }
 
-        .form-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1.2rem;
+        .delete-card {
+            background: var(--card-bg);
+            border: 1px solid #e8b0b0;
+            border-radius: 2px;
+            padding: 2rem;
+            max-width: 680px;
         }
 
-        .form-group {
-            display: flex;
-            flex-direction: column;
-            gap: 0.4rem;
-        }
+        /* ── Form ── */
+        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
 
+        .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
         .form-group.full { grid-column: 1 / -1; }
 
         .form-group label {
@@ -222,82 +168,110 @@
 
         .form-group input:focus,
         .form-group select:focus,
-        .form-group textarea:focus {
-            border-color: var(--rose);
-            background: #fff;
-        }
+        .form-group textarea:focus { border-color: var(--rose); background: #fff; }
 
-        .form-group textarea {
-            resize: vertical;
-            min-height: 90px;
-        }
+        .form-group textarea { resize: vertical; min-height: 90px; }
 
-        /* ── BUTTONS ── */
-        .form-actions {
-            display: flex;
-            gap: 0.8rem;
-            margin-top: 1.6rem;
-            flex-wrap: wrap;
-            align-items: center;
-        }
-
-        .btn-primary {
-            font-size: 0.72rem;
-            letter-spacing: 0.12em;
-            text-transform: uppercase;
-            font-family: 'Segoe UI', sans-serif;
-            color: var(--cream);
-            background: var(--rose);
-            border: 1px solid var(--rose);
+        /* ── File Upload Zone ── */
+        .file-upload-zone {
+            border: 1.5px dashed var(--border);
             border-radius: 2px;
-            padding: 0.55rem 1.4rem;
+            background: var(--cream);
+            padding: 1.4rem 1rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
             cursor: pointer;
-            transition: opacity 0.18s;
+            transition: border-color 0.18s, background 0.18s;
+            text-align: center;
+            position: relative;
         }
 
-        .btn-primary:hover { opacity: 0.85; }
+        .file-upload-zone:hover,
+        .file-upload-zone.dragover { border-color: var(--rose); background: #fff; }
 
-        .btn-secondary {
-            font-size: 0.72rem;
-            letter-spacing: 0.12em;
-            text-transform: uppercase;
-            font-family: 'Segoe UI', sans-serif;
-            color: var(--muted);
+        .file-upload-zone input[type="file"] {
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            cursor: pointer;
+            width: 100%;
+            height: 100%;
+            padding: 0;
+            border: none;
             background: none;
+        }
+
+        .file-upload-zone i { font-size: 1.4rem; color: var(--rose); pointer-events: none; }
+
+        .file-upload-zone .upload-label {
+            font-size: 0.78rem;
+            color: var(--muted);
+            pointer-events: none;
+        }
+
+        .file-upload-zone .upload-label span {
+            color: var(--rose);
+            text-decoration: underline;
+        }
+
+        .file-upload-zone .upload-hint {
+            font-size: 0.65rem;
+            color: #bbb;
+            letter-spacing: 0.08em;
+            pointer-events: none;
+        }
+
+        /* Preview strip */
+        .image-preview {
+            display: none;
+            margin-top: 0.6rem;
+            align-items: center;
+            gap: 0.8rem;
+            padding: 0.6rem 0.8rem;
+            background: var(--cream);
             border: 1px solid var(--border);
             border-radius: 2px;
-            padding: 0.55rem 1.4rem;
-            cursor: pointer;
-            transition: border-color 0.18s, color 0.18s;
         }
 
-        .btn-secondary:hover { border-color: var(--muted); color: var(--deep); }
+        .image-preview.visible { display: flex; }
 
-        .btn-danger {
-            font-size: 0.72rem;
-            letter-spacing: 0.12em;
-            text-transform: uppercase;
-            font-family: 'Segoe UI', sans-serif;
-            color: var(--error);
+        .image-preview img {
+            width: 48px;
+            height: 48px;
+            object-fit: cover;
+            border-radius: 1px;
+            border: 1px solid var(--border);
+            flex-shrink: 0;
+        }
+
+        .image-preview-info { flex: 1; min-width: 0; }
+
+        .image-preview-name {
+            font-size: 0.78rem;
+            color: var(--deep);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .image-preview-size { font-size: 0.65rem; color: var(--muted); margin-top: 0.15rem; }
+
+        .image-preview-remove {
             background: none;
-            border: 1px solid var(--error);
-            border-radius: 2px;
-            padding: 0.55rem 1.4rem;
+            border: none;
+            color: var(--error);
             cursor: pointer;
-            transition: background 0.18s, color 0.18s;
+            font-size: 0.78rem;
+            padding: 0.2rem 0.4rem;
+            flex-shrink: 0;
+            transition: opacity 0.15s;
         }
 
-        .btn-danger:hover { background: var(--error); color: #fff; }
+        .image-preview-remove:hover { opacity: 0.7; }
 
-        /* ── DELETE CARD ── */
-        .delete-card {
-            background: var(--card-bg);
-            border: 1px solid #e8b0b0;
-            border-radius: 2px;
-            padding: 2rem;
-            max-width: 680px;
-        }
-
+        /* ── Cascading selects ── */
         .delete-note {
             font-size: 0.78rem;
             color: var(--muted);
@@ -307,7 +281,74 @@
 
         .delete-note strong { color: var(--error); }
 
-        /* ── RESPONSIVE ── */
+        select:disabled { opacity: 0.45; cursor: not-allowed; }
+
+        /* Spinner for loading products */
+        .select-loading {
+            font-size: 0.7rem;
+            color: var(--muted);
+            display: none;
+            align-items: center;
+            gap: 0.4rem;
+            margin-top: 0.3rem;
+        }
+
+        .select-loading.visible { display: flex; }
+
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .spinner { display: inline-block; width: 12px; height: 12px; border: 1.5px solid var(--border); border-top-color: var(--rose); border-radius: 50%; animation: spin 0.7s linear infinite; }
+
+        /* ── Buttons ── */
+        .form-actions { display: flex; gap: 0.8rem; margin-top: 1.6rem; flex-wrap: wrap; align-items: center; }
+
+        .btn-primary {
+            font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase;
+            font-family: 'Segoe UI', sans-serif; color: var(--cream); background: var(--rose);
+            border: 1px solid var(--rose); border-radius: 2px; padding: 0.55rem 1.4rem;
+            cursor: pointer; transition: opacity 0.18s; display: inline-flex; align-items: center; gap: 0.4rem;
+        }
+        .btn-primary:hover { opacity: 0.85; }
+        .btn-primary:disabled { opacity: 0.5; cursor: not-allowed; }
+
+        .btn-secondary {
+            font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase;
+            font-family: 'Segoe UI', sans-serif; color: var(--muted); background: none;
+            border: 1px solid var(--border); border-radius: 2px; padding: 0.55rem 1.4rem;
+            cursor: pointer; transition: border-color 0.18s, color 0.18s;
+        }
+        .btn-secondary:hover { border-color: var(--muted); color: var(--deep); }
+
+        .btn-danger {
+            font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase;
+            font-family: 'Segoe UI', sans-serif; color: var(--error); background: none;
+            border: 1px solid var(--error); border-radius: 2px; padding: 0.55rem 1.4rem;
+            cursor: pointer; transition: background 0.18s, color 0.18s;
+            display: inline-flex; align-items: center; gap: 0.4rem;
+        }
+        .btn-danger:hover { background: var(--error); color: #fff; }
+        .btn-danger:disabled { opacity: 0.5; cursor: not-allowed; }
+
+        /* ── Toast ── */
+        #toast {
+            position: fixed;
+            bottom: 1.8rem;
+            right: 2rem;
+            padding: 0.7rem 1.2rem;
+            border-radius: 2px;
+            font-size: 0.78rem;
+            letter-spacing: 0.06em;
+            color: #fff;
+            opacity: 0;
+            transform: translateY(8px);
+            transition: opacity 0.22s, transform 0.22s;
+            pointer-events: none;
+            z-index: 999;
+        }
+
+        #toast.show { opacity: 1; transform: translateY(0); }
+        #toast.success { background: var(--success); }
+        #toast.error { background: var(--error); }
+
         @media (max-width: 768px) {
             .sidebar { width: 200px; }
             .main { margin-left: 200px; }
@@ -319,7 +360,6 @@
 </head>
 <body>
 
-<!-- SIDEBAR -->
 <aside class="sidebar">
     <div class="sidebar-brand">
         <h2>Lovelyz</h2>
@@ -335,15 +375,8 @@
             <i class="fa-regular fa-trash-can"></i> Delete Product
         </a>
     </nav>
-
-    <div class="sidebar-footer">
-        <a href="index.html" class="btn-back">
-            <i class="fa-solid fa-arrow-left"></i> Back to Store
-        </a>
-    </div>
 </aside>
 
-<!-- MAIN -->
 <div class="main">
 
     <div class="topbar">
@@ -353,7 +386,7 @@
 
     <div class="content">
 
-        <!-- ── CREATE PANEL ── -->
+        <!-- ══ CREATE PANEL ══ -->
         <div class="panel active" id="panel-create">
             <p class="section-label">New Product</p>
 
@@ -390,44 +423,74 @@
                         <textarea id="c-description" placeholder="Brief product description..."></textarea>
                     </div>
 
+                    <!-- Image upload zone -->
                     <div class="form-group full">
-                        <label for="c-image">Image Path</label>
-                        <input type="text" id="c-image" placeholder="assets/images/filename.jpg">
+                        <label>Product Image</label>
+                        <div class="file-upload-zone" id="upload-zone">
+                            <input type="file" id="c-image" accept=".jpg,.jpeg,.png,.webp,.gif,.avif" />
+                            <i class="fa-regular fa-image"></i>
+                            <p class="upload-label"><span>Click to upload</span> or drag & drop</p>
+                            <p class="upload-hint">JPG · PNG · WEBP · GIF · AVIF</p>
+                        </div>
+                        <div class="image-preview" id="image-preview">
+                            <img id="preview-thumb" src="" alt="">
+                            <div class="image-preview-info">
+                                <div class="image-preview-name" id="preview-name">—</div>
+                                <div class="image-preview-size" id="preview-size">—</div>
+                            </div>
+                            <button class="image-preview-remove" type="button" onclick="clearImage()" title="Remove image">
+                                <i class="fa-solid fa-xmark"></i>
+                            </button>
+                        </div>
                     </div>
 
                 </div>
 
                 <div class="form-actions">
-                    <button class="btn-primary">
+                    <button class="btn-primary" id="btn-create" onclick="createProduct()">
                         <i class="fa-regular fa-floppy-disk"></i> Save Product
                     </button>
-                    <button class="btn-secondary" type="button">Clear</button>
+                    <button class="btn-secondary" type="button" onclick="clearCreateForm()">Clear</button>
                 </div>
             </div>
         </div>
 
-        <!-- ── DELETE PANEL ── -->
+        <!-- ══ DELETE PANEL ══ -->
         <div class="panel" id="panel-delete">
             <p class="section-label">Delete Product</p>
 
             <div class="delete-card">
                 <p class="delete-note">
-                    Enter the <strong>Product ID</strong> of the product you want to permanently delete.
+                    Select a <strong>category</strong> and then the <strong>product</strong> you want to permanently remove.
                     This action cannot be undone.
                 </p>
 
                 <div class="form-grid">
+
                     <div class="form-group">
-                        <label for="d-id">Product ID</label>
-                        <input type="number" id="d-id" placeholder="e.g. 1" min="1">
+                        <label for="d-category">Category</label>
+                        <select id="d-category" onchange="onCategoryChange()">
+                            <option value="">— Select category —</option>
+                        </select>
+                        <div class="select-loading" id="loading-categories">
+                            <span class="spinner"></span> Loading…
+                        </div>
                     </div>
+
+                    <div class="form-group">
+                        <label for="d-product">Product</label>
+                        <select id="d-product" disabled>
+                            <option value="">— Select product —</option>
+                        </select>
+                    </div>
+
                 </div>
 
                 <div class="form-actions">
-                    <button class="btn-danger">
+                    <button class="btn-danger" id="btn-delete" onclick="deleteProduct()" disabled>
                         <i class="fa-regular fa-trash-can"></i> Delete Product
                     </button>
-                    <button class="btn-secondary" type="button">Clear</button>
+                    <button class="btn-secondary" type="button" onclick="clearDeleteForm()">Clear</button>
                 </div>
             </div>
         </div>
@@ -435,21 +498,272 @@
     </div>
 </div>
 
+<div id="toast"></div>
+
 <script>
+    const API = {
+        create: '/lovelyz2/api/products/upload_products.php',
+        delete: '/lovelyz2/api/products/delete_products.php',
+        get:    '/lovelyz2/api/products/get_products.php',
+    };
+
+    let toastTimer;
+    function showToast(msg, type = 'success') {
+        const t = document.getElementById('toast');
+        t.textContent = msg;
+        t.className = `show ${type}`;
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(() => { t.className = ''; }, 3000);
+    }
+
+    function authHeader() {
+        const token = localStorage.getItem('token') || '';
+        return token ? { 'Authorization': 'Bearer ' + token } : {};
+    }
+
+    const topbarCopy = {
+        create: ['Create Product', 'Add a new product to the store'],
+        delete: ['Delete Product', 'Permanently remove a product'],
+    };
+
     function showPanel(name, item) {
         document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
         document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-
         document.getElementById('panel-' + name).classList.add('active');
         item.classList.add('active');
+        document.getElementById('topbar-title').textContent = topbarCopy[name][0];
+        document.getElementById('topbar-sub').textContent   = topbarCopy[name][1];
 
-        const titles = {
-            create: ['Create Product', 'Add a new product to the store'],
-            delete: ['Delete Product', 'Permanently remove a product by ID']
+        if (name === 'delete') loadProducts();
+    }
+
+    const fileInput   = document.getElementById('c-image');
+    const uploadZone  = document.getElementById('upload-zone');
+    const previewBox  = document.getElementById('image-preview');
+    const previewThumb = document.getElementById('preview-thumb');
+    const previewName  = document.getElementById('preview-name');
+    const previewSize  = document.getElementById('preview-size');
+
+    fileInput.addEventListener('change', () => handleFile(fileInput.files[0]));
+
+    uploadZone.addEventListener('dragover', e => { e.preventDefault(); uploadZone.classList.add('dragover'); });
+    uploadZone.addEventListener('dragleave', () => uploadZone.classList.remove('dragover'));
+    uploadZone.addEventListener('drop', e => {
+        e.preventDefault();
+        uploadZone.classList.remove('dragover');
+        const file = e.dataTransfer.files[0];
+        if (file) {
+            if (!file.type.startsWith('image/')) {
+                showToast('Only image files are allowed.', 'error');
+                return;
+            }
+            const dt = new DataTransfer();
+            dt.items.add(file);
+            fileInput.files = dt.files;
+            handleFile(file);
+        }
+    });
+
+    function handleFile(file) {
+        if (!file) return;
+        if (!file.type.startsWith('image/')) {
+            showToast('Only image files are allowed (JPG, PNG, WEBP, GIF, AVIF).', 'error');
+            fileInput.value = '';
+            return;
+        }
+        const reader = new FileReader();
+        reader.onload = e => {
+            previewThumb.src = e.target.result;
+            previewName.textContent = file.name;
+            previewSize.textContent = formatBytes(file.size);
+            previewBox.classList.add('visible');
         };
+        reader.readAsDataURL(file);
+    }
 
-        document.getElementById('topbar-title').textContent = titles[name][0];
-        document.getElementById('topbar-sub').textContent = titles[name][1];
+    function clearImage() {
+        fileInput.value = '';
+        previewThumb.src = '';
+        previewBox.classList.remove('visible');
+    }
+
+    function formatBytes(bytes) {
+        if (bytes < 1024) return bytes + ' B';
+        if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + ' KB';
+        return (bytes / (1024 * 1024)).toFixed(1) + ' MB';
+    }
+
+    async function createProduct() {
+        const name        = document.getElementById('c-name').value.trim();
+        const category    = document.getElementById('c-category').value;
+        const price       = document.getElementById('c-price').value;
+        const stock       = document.getElementById('c-stock').value;
+        const description = document.getElementById('c-description').value.trim();
+        const file        = fileInput.files[0];
+
+        if (!name || !category || !price || !stock || !description || !file) {
+            showToast('Please fill in all fields and select an image.', 'error');
+            return;
+        }
+
+        const btn = document.getElementById('btn-create');
+        btn.disabled = true;
+        btn.innerHTML = '<span class="spinner" style="border-top-color:#fff"></span> Saving…';
+
+        try {
+            const formData = new FormData();
+            formData.append('name', name);
+            formData.append('category', category);
+            formData.append('description', description);
+            formData.append('price', price);
+            formData.append('stock', stock);
+            formData.append('image', file); 
+
+            const res = await fetch(API.create, {
+                method: 'POST',
+                headers: authHeader(), 
+                body: formData,
+            });
+
+            const json = await res.json();
+
+            if (json.success) {
+                showToast('Product saved successfully.', 'success');
+                clearCreateForm();
+            } else {
+                showToast(json.message || 'Failed to save product.', 'error');
+            }
+        } catch (err) {
+            showToast('Network error. Please try again.', 'error');
+        } finally {
+            btn.disabled = false;
+            btn.innerHTML = '<i class="fa-regular fa-floppy-disk"></i> Save Product';
+        }
+    }
+
+    function clearCreateForm() {
+        ['c-name', 'c-price', 'c-stock', 'c-description'].forEach(id => document.getElementById(id).value = '');
+        document.getElementById('c-category').value = '';
+        clearImage();
+    }
+
+    let productMap = {};
+
+    async function loadProducts() {
+    const catSelect = document.getElementById('d-category');
+    const loadingEl = document.getElementById('loading-categories');
+
+    catSelect.innerHTML = '<option value="">— Select category —</option>';
+    document.getElementById('d-product').innerHTML = '<option value="">— Select product —</option>';
+    document.getElementById('d-product').disabled = true;
+    document.getElementById('btn-delete').disabled = true;
+
+    productMap = {};
+
+    loadingEl.classList.add('visible');
+
+    try {
+        const res = await fetch(API.get, {
+            method: 'GET',
+            headers: { 'Content-Type': 'application/json', ...authHeader() },
+        });
+
+        const json = await res.json();
+
+        if (!json.success) {
+            showToast('Could not load products.', 'error');
+            return;
+        }
+
+        json.data.forEach(p => {
+            if (!productMap[p.category]) productMap[p.category] = [];
+            productMap[p.category].push({
+                id: p.product_id,
+                name: p.name
+            });
+        });
+
+        Object.keys(productMap).sort().forEach(cat => {
+            const opt = document.createElement('option');
+            opt.value = cat;
+            opt.textContent = cat;
+            catSelect.appendChild(opt);
+        });
+
+    } catch (err) {
+        showToast('Network error while loading products.', 'error');
+    } finally {
+        loadingEl.classList.remove('visible');
+    }
+}
+
+    function onCategoryChange() {
+        const cat        = document.getElementById('d-category').value;
+        const prodSelect = document.getElementById('d-product');
+        const btnDel     = document.getElementById('btn-delete');
+
+        prodSelect.innerHTML = '<option value="">— Select product —</option>';
+        prodSelect.disabled  = true;
+        btnDel.disabled      = true;
+
+        if (!cat || !productMap[cat]) return;
+
+        productMap[cat].forEach(p => {
+            const opt = document.createElement('option');
+            opt.value = p.id;
+            opt.textContent = p.name;
+            prodSelect.appendChild(opt);
+        });
+
+        prodSelect.disabled = false;
+
+        prodSelect.onchange = () => {
+            btnDel.disabled = !prodSelect.value;
+        };
+    }
+
+    async function deleteProduct() {
+        const productId   = document.getElementById('d-product').value;
+        const productName = document.getElementById('d-product').selectedOptions[0]?.textContent;
+
+        if (!productId) { showToast('Please select a product.', 'error'); return; }
+
+        if (!confirm(`Delete "${productName}"? This cannot be undone.`)) return;
+
+        const btn = document.getElementById('btn-delete');
+        btn.disabled = true;
+        btn.innerHTML = '<span class="spinner" style="border-top-color:var(--error)"></span> Deleting…';
+
+        try {
+            const res = await fetch(API.delete, {
+                method: 'DELETE',
+                headers: { 'Content-Type': 'application/json', ...authHeader() },
+                body: JSON.stringify({ product_id: parseInt(productId) }),
+            });
+
+            const json = await res.json();
+
+            if (json.success) {
+                showToast('Product deleted.', 'success');
+                clearDeleteForm();
+                loadProducts();
+            } else {
+                showToast(json.message || 'Failed to delete product.', 'error');
+            }
+        } catch (err) {
+            showToast('Network error. Please try again.', 'error');
+        } finally {
+            btn.disabled = false;
+            btn.innerHTML = '<i class="fa-regular fa-trash-can"></i> Delete Product';
+        }
+    }
+
+    function clearDeleteForm() {
+        document.getElementById('d-category').value = '';
+        const prodSelect = document.getElementById('d-product');
+        prodSelect.innerHTML = '<option value="">— Select product —</option>';
+        prodSelect.disabled  = true;
+        document.getElementById('btn-delete').disabled = true;
     }
 </script>
 

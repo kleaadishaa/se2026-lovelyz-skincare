@@ -4,8 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Orders – Lovelyz Skincare</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" crossorigin="anonymous">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+          crossorigin="anonymous">
+
     <style>
+
         :root {
             --cream: #f9f4ef;
             --blush: #e8d5c4;
@@ -14,17 +19,25 @@
             --muted: #7a6860;
             --card-bg: #ffffff;
             --border: #e2d4ca;
+
             --pending: #d4a853;
             --completed: #6aab8e;
             --cancelled: #c97a7a;
         }
 
-        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
         body {
             color: var(--deep);
             min-height: 100vh;
             font-family: 'Segoe UI', sans-serif;
+            background: #fff;
         }
 
         nav {
@@ -42,31 +55,14 @@
             text-decoration: none;
         }
 
-        nav .nav-links a {
-            color: var(--blush);
-            text-decoration: none;
-            font-size: 0.78rem;
-            letter-spacing: 0.12em;
-            text-transform: uppercase;
-            margin-left: 2rem;
-            font-weight: 300;
-            transition: color 0.2s;
-        }
-
-        nav .nav-links a:hover { color: var(--cream); }
-
         .page-header {
             background: var(--deep);
             padding: 3.5rem 2.5rem 2.5rem;
-            position: relative;
-            overflow: hidden;
         }
 
         .user-block {
-            max-width: 900px;
+            max-width: 1000px;
             margin: 0 auto;
-            position: relative;
-            z-index: 1;
         }
 
         .greeting {
@@ -81,7 +77,6 @@
             font-size: clamp(2rem, 5vw, 3.2rem);
             font-weight: 300;
             color: var(--cream);
-            letter-spacing: 0.02em;
             margin-bottom: 0.4rem;
         }
 
@@ -93,7 +88,7 @@
         }
 
         main {
-            max-width: 900px;
+            max-width: 1000px;
             margin: 0 auto;
             padding: 3rem 1.5rem 5rem;
         }
@@ -119,30 +114,19 @@
         .order-card {
             background: var(--card-bg);
             border: 1px solid var(--border);
-            border-radius: 2px;
             margin-bottom: 2rem;
             overflow: hidden;
-            animation: fadeUp 0.5s ease both;
-        }
-
-        .order-card:nth-child(2) { animation-delay: 0.08s; }
-        .order-card:nth-child(3) { animation-delay: 0.16s; }
-        .order-card:nth-child(4) { animation-delay: 0.24s; }
-
-        @keyframes fadeUp {
-            from { opacity: 0; transform: translateY(18px); }
-            to   { opacity: 1; transform: translateY(0); }
         }
 
         .order-header {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 1.2rem 1.6rem;
+            padding: 1.3rem 1.5rem;
             border-bottom: 1px solid var(--border);
-            flex-wrap: wrap;
-            gap: 0.8rem;
             background: #fdfaf7;
+            flex-wrap: wrap;
+            gap: 1rem;
         }
 
         .order-meta {
@@ -155,32 +139,23 @@
         .order-id {
             font-size: 1.1rem;
             font-weight: 600;
-            color: var(--deep);
         }
 
-        .order-id span {
-            font-size: 0.7rem;
-            letter-spacing: 0.15em;
-            color: var(--muted);
-            font-weight: 300;
-            text-transform: uppercase;
+        .order-id span,
+        .meta-label,
+        .shipping-label,
+        .items-label {
             display: block;
-            margin-bottom: 0.15rem;
-        }
-
-        .order-date {
-            font-size: 0.75rem;
-            color: var(--muted);
-            font-weight: 300;
-        }
-
-        .order-date span {
             font-size: 0.65rem;
-            letter-spacing: 0.1em;
+            letter-spacing: 0.14em;
             text-transform: uppercase;
-            display: block;
-            margin-bottom: 0.15rem;
-            color: #b0a099;
+            color: var(--muted);
+            margin-bottom: 0.2rem;
+        }
+
+        .meta-text {
+            font-size: 0.82rem;
+            color: var(--deep);
         }
 
         .status-badge {
@@ -192,77 +167,134 @@
             border-radius: 20px;
         }
 
-        .status-pending    { background: #fdf3dc; color: var(--pending);   border: 1px solid #f0d99a; }
-        .status-completed  { background: #e6f4ed; color: var(--completed); border: 1px solid #a8d8bc; }
-        .status-cancelled  { background: #fdeaea; color: var(--cancelled); border: 1px solid #e8b0b0; }
-        .status-processing { background: #e8f0fd; color: #5b8dee;          border: 1px solid #a8c0f0; }
-        .status-shipped    { background: #f0eafd; color: #9b6ddb;          border: 1px solid #c8a8f0; }
-        .status-delivered  { background: #e6f4ed; color: var(--completed); border: 1px solid #a8d8bc; }
+        .status-pending {
+            background: #fdf3dc;
+            color: var(--pending);
+            border: 1px solid #f0d99a;
+        }
 
-        .order-total { text-align: right; }
+        .status-processing {
+            background: #e8f0fd;
+            color: #5b8dee;
+            border: 1px solid #a8c0f0;
+        }
 
-        .order-total span {
-            font-size: 0.65rem;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            color: #b0a099;
-            display: block;
-            margin-bottom: 0.15rem;
+        .status-shipped {
+            background: #f0eafd;
+            color: #9b6ddb;
+            border: 1px solid #c8a8f0;
+        }
+
+        .status-delivered {
+            background: #e6f4ed;
+            color: var(--completed);
+            border: 1px solid #a8d8bc;
+        }
+
+        .status-cancelled {
+            background: #fdeaea;
+            color: var(--cancelled);
+            border: 1px solid #e8b0b0;
+        }
+
+        .order-total {
+            text-align: right;
         }
 
         .order-total strong {
-            font-size: 1.3rem;
-            font-weight: 600;
+            font-size: 1.4rem;
             color: var(--rose);
         }
 
-        .order-items { padding: 1.4rem 1.6rem; }
-
-        .items-label {
-            font-size: 0.65rem;
-            letter-spacing: 0.16em;
-            text-transform: uppercase;
-            color: var(--muted);
-            margin-bottom: 1rem;
-            font-weight: 400;
+        .order-items {
+            padding: 1.5rem;
         }
 
-        table { width: 100%; border-collapse: collapse; font-size: 0.82rem; }
+        .shipping-box {
+            background: #faf7f4;
+            border: 1px solid #efe5dc;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+        }
 
-        thead tr { border-bottom: 1px solid var(--border); }
+        .shipping-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 1rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.82rem;
+        }
+
+        thead tr {
+            border-bottom: 1px solid var(--border);
+        }
 
         thead th {
             text-align: left;
+            padding: 0 0.5rem 0.8rem;
             font-size: 0.62rem;
-            letter-spacing: 0.14em;
             text-transform: uppercase;
+            letter-spacing: 0.14em;
             color: var(--muted);
-            font-weight: 400;
-            padding: 0 0.5rem 0.7rem;
+            font-weight: 500;
         }
-
-        thead th:last-child { text-align: right; }
 
         tbody tr {
             border-bottom: 1px solid #f0e9e3;
-            transition: background 0.15s;
         }
-
-        tbody tr:last-child { border-bottom: none; }
-        tbody tr:hover { background: #fdf9f6; }
 
         tbody td {
-            padding: 0.85rem 0.5rem;
-            color: var(--deep);
-            font-weight: 300;
+            padding: 1rem 0.5rem;
         }
 
-        .product-name-cell { font-weight: 400; color: var(--deep); }
-        .product-id-cell   { color: var(--muted); font-size: 0.75rem; }
-        .discount-cell     { color: var(--completed); font-size: 0.78rem; }
-        .price-cell        { font-size: 1rem; font-weight: 600; }
-        .qty-cell          { color: var(--muted); }
-        .line-total-cell   { text-align: right; font-size: 1rem; font-weight: 600; color: var(--deep); }
+        .line-total-cell {
+            text-align: right;
+            font-weight: 600;
+        }
+
+        .price-cell {
+            font-weight: 600;
+        }
+
+        .discount-cell {
+            color: var(--completed);
+        }
+
+        .order-actions {
+            display: flex;
+            gap: 0.8rem;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .action-btn {
+            border: 1px solid var(--border);
+            background: white;
+            padding: 0.8rem 1.2rem;
+            cursor: pointer;
+            font-size: 0.68rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            transition: 0.2s;
+        }
+
+        .action-btn:hover {
+            background: var(--deep);
+            color: white;
+        }
+
+        .btn-cancel {
+            color: var(--cancelled);
+            border-color: #e8b0b0;
+        }
+
+        .btn-delete {
+            color: #666;
+        }
 
         .empty-state {
             text-align: center;
@@ -272,31 +304,32 @@
 
         .empty-state i {
             font-size: 2.5rem;
-            color: var(--blush);
-            margin-bottom: 1.2rem;
+            margin-bottom: 1rem;
             display: block;
+            color: var(--blush);
         }
 
-        .empty-state h3 {
-            font-size: 1.6rem;
-            font-weight: 300;
-            margin-bottom: 0.5rem;
-            color: var(--deep);
+        @media(max-width: 700px) {
+
+            .order-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            table {
+                font-size: 0.74rem;
+            }
+
+            thead th:nth-child(2),
+            tbody td:nth-child(2) {
+                display: none;
+            }
+
         }
 
-        .empty-state p { font-size: 0.82rem; font-weight: 300; }
-
-        @media (max-width: 600px) {
-            nav { padding: 1rem 1.2rem; }
-            .nav-links { display: none; }
-            .page-header { padding: 2.5rem 1.2rem 2rem; }
-            main { padding: 2rem 1rem 4rem; }
-            .order-header { flex-direction: column; align-items: flex-start; }
-            thead th:nth-child(2), tbody td:nth-child(2) { display: none; }
-            thead th:nth-child(4), tbody td:nth-child(4) { display: none; }
-        }
     </style>
 </head>
+
 <body>
 
 <nav>
@@ -305,122 +338,348 @@
 
 <div class="page-header">
     <div class="user-block">
+
         <p class="greeting">Account Overview</p>
+
         <h1 class="user-name" id="display-name">—</h1>
+
         <p class="user-email" id="display-email">—</p>
+
     </div>
 </div>
 
 <main>
+
     <p class="section-label">Order History</p>
+
     <div id="orders-container">
+
         <div class="empty-state">
+            <i class="fa-solid fa-spinner fa-spin"></i>
+            <p>Loading orders...</p>
         </div>
+
     </div>
+
 </main>
 
 <script>
+
     const token = localStorage.getItem('token');
 
     if (!token) {
         window.location.href = 'index.php';
     }
 
-    const headers = { 'Authorization': 'Bearer ' + token };
+    const headers = {
+        'Authorization': 'Bearer ' + token
+    };
 
     function formatDate(str) {
+
         const d = new Date(str);
-        return d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })
-            + ' — ' + d.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
+
+        return d.toLocaleDateString('en-GB', {
+            day: 'numeric',
+            month: 'short',
+            year: 'numeric'
+        }) + ' — ' +
+        d.toLocaleTimeString('en-GB', {
+            hour: '2-digit',
+            minute: '2-digit'
+        });
     }
 
     function lineTotal(price, qty, discount) {
-        return (price * qty * (1 - (parseFloat(discount) || 0) / 100)).toFixed(2);
+
+        return (
+            price *
+            qty *
+            (1 - (parseFloat(discount || 0) / 100))
+        ).toFixed(2);
     }
 
     function statusBadge(status) {
-        return `<span class="status-badge status-${status}">${status}</span>`;
+
+        return `
+            <span class="status-badge status-${status}">
+                ${status}
+            </span>
+        `;
     }
 
     async function loadUser() {
-        const res = await fetch('api/clients/get_user.php', { headers });
-        const data = await res.json();
 
-        if (!data.success) {
-            if (res.status === 401) {
-                localStorage.removeItem('token');
-                window.location.href = 'index.php';
-                return;
-            }
-            return;
-        }
-
-        document.getElementById('display-name').textContent = data.profile.username;
-        document.getElementById('display-email').textContent = data.profile.email;
-    }
-
-    async function loadOrders() {
         try {
-            const res = await fetch('api/orders/get_orders.php', { headers });
+
+            const res = await fetch(
+                'api/clients/get_user.php',
+                { headers }
+            );
+
             const data = await res.json();
 
             if (!data.success) {
+
                 if (res.status === 401) {
+
                     localStorage.removeItem('token');
                     window.location.href = 'index.php';
-                    return;
                 }
+
+                return;
+            }
+
+            document.getElementById('display-name').textContent =
+                data.profile.username;
+
+            document.getElementById('display-email').textContent =
+                data.profile.email;
+
+        } catch (err) {
+
+            console.error(err);
+        }
+    }
+
+    async function updateOrderStatus(orderId, status) {
+
+        if (!confirm(`Change order #${orderId} to "${status}"?`)) {
+            return;
+        }
+
+        try {
+
+            const res = await fetch(
+                'api/orders/update_order_status.php',
+                {
+                    method: 'POST',
+                    headers: {
+                        ...headers,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        order_id: orderId,
+                        status: status
+                    })
+                }
+            );
+
+            const data = await res.json();
+
+            if (!data.success) {
+                alert(data.message || 'Failed.');
+                return;
+            }
+
+            loadOrders();
+
+        } catch (err) {
+
+            alert('Something went wrong.');
+        }
+    }
+
+    async function deleteOrder(orderId) {
+
+        if (!confirm(`Delete order #${orderId}?`)) {
+            return;
+        }
+
+        try {
+
+            const res = await fetch(
+                `api/orders/delete_order.php?order_id=${orderId}`,
+                {
+                    method: 'DELETE',
+                    headers
+                }
+            );
+
+            const data = await res.json();
+
+            if (!data.success) {
+                alert(data.message || 'Failed.');
+                return;
+            }
+
+            loadOrders();
+
+        } catch (err) {
+
+            alert('Something went wrong.');
+        }
+    }
+
+    async function loadOrders() {
+
+        try {
+
+            const res = await fetch(
+                'api/orders/get_orders.php',
+                { headers }
+            );
+
+            const data = await res.json();
+
+            if (!data.success) {
+
                 showError('Could not load orders.');
                 return;
             }
 
             const orders = data.data;
 
-            if (orders.length === 0) {
+            if (!orders.length) {
+
                 showEmpty();
                 return;
             }
 
-            const container = document.getElementById('orders-container');
+            const container =
+                document.getElementById('orders-container');
+
             container.innerHTML = '';
 
             for (const order of orders) {
-                const card = await buildOrderCard(order);
+
+                const card =
+                    await buildOrderCard(order);
+
                 container.appendChild(card);
             }
 
         } catch (err) {
-            showError('Something went wrong. Please try again.');
+
+            showError('Something went wrong.');
         }
     }
 
     async function buildOrderCard(order) {
+
         const card = document.createElement('div');
+
         card.className = 'order-card';
 
         let itemsHTML = '';
 
         try {
-            const res = await fetch(`api/orders/get_orders_details.php?order_id=${order.order_id}`, { headers });
+
+            const res = await fetch(
+                `api/orders/get_orders_details.php?order_id=${order.order_id}`,
+                { headers }
+            );
+
             const detail = await res.json();
 
-            if (detail.success && detail.data.products && detail.data.products.length > 0) {
-                const rows = detail.data.products.map((p, i) => `
+            if (
+                detail.success &&
+                detail.data.products &&
+                detail.data.products.length > 0
+            ) {
+
+                const info = detail.data;
+
+                const rows = info.products.map((p, i) => `
+
                     <tr>
-                        <td class="product-id-cell">${i + 1}</td>
-                        <td class="product-id-cell">${p.product_id ?? '—'}</td>
-                        <td class="product-name-cell">${p.product_name}</td>
-                        <td class="discount-cell">${parseFloat(p.discount_percent || 0)}%</td>
-                        <td class="price-cell">$${parseFloat(p.price).toFixed(2)}</td>
-                        <td class="qty-cell">${p.quantity}</td>
-                        <td class="line-total-cell">$${lineTotal(p.price, p.quantity, p.discount_percent)}</td>
+
+                        <td>${i + 1}</td>
+
+                        <td>${p.product_id ?? '—'}</td>
+
+                        <td>${p.product_name}</td>
+
+                        <td class="discount-cell">
+                            ${parseFloat(p.discount_percent || 0)}%
+                        </td>
+
+                        <td class="price-cell">
+                            $${parseFloat(p.price).toFixed(2)}
+                        </td>
+
+                        <td>${p.quantity}</td>
+
+                        <td class="line-total-cell">
+                            $${lineTotal(
+                                p.price,
+                                p.quantity,
+                                p.discount_percent
+                            )}
+                        </td>
+
                     </tr>
+
                 `).join('');
 
                 itemsHTML = `
-                    <p class="items-label">Items in this order</p>
+
+                    <div class="shipping-box">
+
+                        <div class="shipping-grid">
+
+                            <div>
+                                <span class="shipping-label">
+                                    Username
+                                </span>
+
+                                <div class="meta-text">
+                                    ${info.username}
+                                </div>
+                            </div>
+
+                            <div>
+                                <span class="shipping-label">
+                                    Email
+                                </span>
+
+                                <div class="meta-text">
+                                    ${info.email}
+                                </div>
+                            </div>
+
+                            <div>
+                                <span class="shipping-label">
+                                    Street
+                                </span>
+
+                                <div class="meta-text">
+                                    ${info.shipping_street}
+                                </div>
+                            </div>
+
+                            <div>
+                                <span class="shipping-label">
+                                    City
+                                </span>
+
+                                <div class="meta-text">
+                                    ${info.shipping_city}
+                                </div>
+                            </div>
+
+                            <div>
+                                <span class="shipping-label">
+                                    Country
+                                </span>
+
+                                <div class="meta-text">
+                                    ${info.shipping_country}
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <p class="items-label">
+                        Items in this order
+                    </p>
+
                     <table>
+
                         <thead>
+
                             <tr>
                                 <th>#</th>
                                 <th>Product ID</th>
@@ -428,65 +687,125 @@
                                 <th>Discount</th>
                                 <th>Price</th>
                                 <th>Qty</th>
-                                <th>Line Total</th>
+                                <th>Total</th>
                             </tr>
+
                         </thead>
-                        <tbody>${rows}</tbody>
+
+                        <tbody>
+
+                            ${rows}
+
+                        </tbody>
+
                     </table>
                 `;
-            } else {
-                itemsHTML = '<p class="product-id-cell" style="padding:0.5rem 0;">No items found for this order.</p>';
             }
-        } catch {
-            itemsHTML = '<p class="product-id-cell" style="padding:0.5rem 0;">Could not load items.</p>';
+
+        } catch (err) {
+
+            itemsHTML = `
+                <p class="meta-text">
+                    Failed to load items.
+                </p>
+            `;
         }
 
         card.innerHTML = `
+
             <div class="order-header">
+
                 <div class="order-meta">
-                    <div class="order-id">
-                        <span>Order</span>
-                        #${order.order_id}
+
+                    <div>
+
+                        <span class="meta-label">
+                            Date
+                        </span>
+
+                        <div class="meta-text">
+                            ${formatDate(order.created_at)}
+                        </div>
+
                     </div>
-                    <div class="order-date">
-                        <span>Placed on</span>
-                        ${formatDate(order.created_at)}
-                    </div>
+
                     ${statusBadge(order.status)}
+
                 </div>
+
                 <div class="order-total">
-                    <span>Total</span>
-                    <strong>$${parseFloat(order.total_price).toFixed(2)}</strong>
+
+                    <span class="meta-label">
+                        Total
+                    </span>
+
+                    <strong>
+                        $${parseFloat(order.total_price).toFixed(2)}
+                    </strong>
+
                 </div>
+
             </div>
-            <div class="order-items">${itemsHTML}</div>
+
+            <div class="order-items">
+
+                ${itemsHTML}
+
+                <div class="order-actions">
+
+                    <button
+                        class="action-btn btn-delete"
+                        onclick="deleteOrder(${order.order_id})">
+
+                        Delete Order
+
+                    </button>
+
+                </div>
+
+            </div>
         `;
 
         return card;
     }
 
     function showEmpty() {
+
         document.getElementById('orders-container').innerHTML = `
+
             <div class="empty-state">
+
                 <i class="fa-regular fa-bag-shopping"></i>
+
                 <h3>No orders yet</h3>
-                <p>When you place an order it will appear here.</p>
+
+                <p>
+                    When you place an order it will appear here.
+                </p>
+
             </div>
         `;
     }
 
     function showError(msg) {
+
         document.getElementById('orders-container').innerHTML = `
+
             <div class="empty-state">
+
                 <i class="fa-regular fa-circle-xmark"></i>
+
                 <h3>Something went wrong</h3>
+
                 <p>${msg}</p>
+
             </div>
         `;
     }
 
     loadUser();
     loadOrders();
+
 </script>
 
 </body>

@@ -364,9 +364,6 @@ require_once 'includes/login_view.inc.php';
                     <span class="bottom-key-2"></span>
                 </button>
             </form>
-            <a href="index.html" class="back-link">
-                <i class="fa-solid fa-arrow-left"></i> Back to store
-            </a>
         </div>
 
         <div class="form-panel" id="panel-register">
@@ -402,9 +399,6 @@ require_once 'includes/login_view.inc.php';
                     <span class="bottom-key-2"></span>
                 </button>
             </form>
-            <a href="index.html" class="back-link">
-                <i class="fa-solid fa-arrow-left"></i> Back to store
-            </a>
         </div>
 
     </div>

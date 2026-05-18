@@ -16,7 +16,6 @@ const owlSettings = {
     }
 };
 
-// ─── BUILD PRODUCT CARD ───────────────────────────────────────────────────────
 function buildCard(p) {
     return `
         <div class="item">
@@ -69,7 +68,7 @@ async function loadProducts() {
     setTimeout(() => {
         $(selector).owlCarousel({
             ...owlSettings,
-            loop: filtered.length > 5,  // only loop if more products than max visible
+            loop: filtered.length > 5, 
             autoplay: filtered.length > 5
         });
     }, 100);
@@ -96,13 +95,16 @@ async function addToCart(name, price, btn) {
     }
 
     try {
-        const res = await fetch('api/cart/add_to_cart.php', {
+        const res = await fetch('api/cart/add_tto_cart.php', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': 'Bearer ' + token
             },
-            body: JSON.stringify({ product_id: productId, quantity })
+            body: JSON.stringify({product_id: productId,
+                                  product_name: name,
+                                  price: price,
+                                  quantity: quantity})
         });
 
         const data = await res.json();

@@ -229,10 +229,6 @@ section {
     width: 100%;
     object-fit: cover;
 }
-
-.card-title, .card-text {
-    padding-left: 6px;
-}
 .card-title {
     text-wrap: nowrap;
 }
@@ -564,7 +560,7 @@ section {
     }
     .navbar-nav a {
         font-size: 1rem;
-        color: #000;
+        color: #fff;
     }
     .navbar-toggler-icon {
         filter: invert(1);
