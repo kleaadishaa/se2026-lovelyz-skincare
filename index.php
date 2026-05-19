@@ -438,6 +438,5 @@ require_once 'includes/login_view.inc.php';
         }
     });
 </script>
-
 </body>
 </html>
