@@ -22,21 +22,14 @@ function get_email(object $pdo, string $email){
     return $result;
 }
 
-function set_user(object $pdo,string $pwd, string $username, string $email)
-{
-  $query = "INSERT INTO users (username, pwd, email) VALUES (:username, :pwd, :email);";
+function set_user(object $pdo, string $pwd, string $username, string $email) {
+    $query = "INSERT INTO users (username, pwd, email) VALUES (:username, :pwd, :email);";
     $stmt = $pdo->prepare($query);
-    //password hashing ketu
-
-    $options = [
-        'cost' => 12
-    ];
+    $options = ['cost' => 12];
     $hashedPwd = password_hash($pwd, PASSWORD_BCRYPT, $options);
-
-
-
     $stmt->bindParam(":username", $username);
     $stmt->bindParam(":pwd", $hashedPwd);
     $stmt->bindParam(":email", $email);
-    $stmt->execute();  
+    $stmt->execute();
+    return $pdo->lastInsertId(); // kthe ID-ne
 }

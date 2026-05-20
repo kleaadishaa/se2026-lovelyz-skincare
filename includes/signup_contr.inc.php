@@ -41,9 +41,6 @@ function is_email_registered(object $pdo,string $email) {
 
 }
 
-function create_user(object $pdo,string $pwd, string $username, string $email) 
-{
-  set_user($pdo, $pwd, $username, $email);  
-    
-
+function create_user(object $pdo, string $pwd, string $username, string $email) {
+    return set_user($pdo, $pwd, $username, $email); // kthe ID-ne
 }

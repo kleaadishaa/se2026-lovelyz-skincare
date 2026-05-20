@@ -37,9 +37,26 @@ $email = $_POST["email"];
         die();
     }
 
-    create_user($pdo, $pwd, $username, $email);
+    // Krijo userin dhe merr ID-ne
+        $newUserId = create_user($pdo, $pwd, $username, $email);
 
-    header("Location: ../index.html");
+session_unset();
+session_regenerate_id(true);
+
+$_SESSION['user_id'] = $newUserId;
+$_SESSION['username'] = $username;
+require_once 'jwt_helper.inc.php';
+$newUser = [
+    'user_id'  => $newUserId,
+    'username' => $username,
+    'email'    => $email,
+    'role'     => 'user'
+];
+$token = generateJWT($newUser);
+$_SESSION['pending_token'] = $token;
+
+
+    header("Location: ../index.php");
 
     $pdo = null;
     $stmt = null;

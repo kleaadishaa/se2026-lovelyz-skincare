@@ -315,6 +315,7 @@ require_once 'includes/login_view.inc.php';
             .right-panel { padding: 3rem 2.5rem; }
         }
     </style>
+    
 </head>
 <body>
 
@@ -347,7 +348,7 @@ require_once 'includes/login_view.inc.php';
                 <h1>Welcome<br>back.</h1>
                 <p>Log in to your Lovelyz account.</p>
             </div>
-            <form action="includes/login.inc.php" method="POST">
+            <form id="login-form">
                 <div class="field">
                     <label for="login-email">Email</label>
                     <input type="email" id="login-email" name="email" placeholder="you@example.com" required>
@@ -438,5 +439,12 @@ require_once 'includes/login_view.inc.php';
         }
     });
 </script>
+<?php if (isset($_SESSION['pending_token'])): ?>
+<script>
+    localStorage.setItem('token', '<?= $_SESSION['pending_token'] ?>');
+    <?php unset($_SESSION['pending_token']); ?>
+
+</script>
+<?php endif; ?>
 </body>
 </html>
