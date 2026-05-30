@@ -19,5 +19,4 @@ Database (Baza e të Dhënave): Si sistem menaxhimi është përdorur MySQL (RDB
 
 Siguria: Autentikimi bazohet në role (RBAC). Fjalëkalimet ruhen me hashing (bcrypt). Pikat fundore (Endpoints) mbrohen nga sulmet Brute-Force përmes mekanizmit Rate-Limiting (tabela rate_limits).
 
-## 4. Diagrami i Skenarëve të Përdorimit (Use Case Diagram)
 
