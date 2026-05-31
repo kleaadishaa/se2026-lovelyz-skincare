@@ -43,6 +43,7 @@
 | GET | /api/products | Lista produkteve |
 | POST | /api/upload_product | Shto produkt |
 | DELETE | /api/delete_product | Fshi produkt |
+| POST | /api/orders/create_order.php | Krijo porosi |
 | GET | /api/clients/get_user | Merr profilin |
 | PUT | /api/clients/update_user | Përditëso profilin |
 | DELETE | /api/clients/delete_user | Fshi llogarinë |
@@ -50,7 +51,6 @@
 | GET | /api/cart/get_cart.php | Merr artikujt e shportës |
 | POST | /api/cart/checkout.php | Krijo porosinë dhe pastro shportën |
 | DELETE | /api/cart/delete_cart_item.php | Fshi artikull nga shporta |
-| POST | /api/orders/create_order.php | Krijo porosi |
 | GET | /api/orders/get_orders.php | Merr të gjitha porositë |
 | GET | /api/orders/get_orders_details.php | Merr detajet e porosisë |
 | PUT | /api/orders/update_order.php | Përditëso statusin e porosisë |
