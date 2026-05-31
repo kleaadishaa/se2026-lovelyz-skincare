@@ -144,6 +144,7 @@
 
 ![TS-04](screenshots/ts-04-delete-user.png)
 
+
 ## TS-05 — Login (Autentikimi i përdoruesit)
 
 | Fusha    | Detaji                                                        |
@@ -202,5 +203,6 @@
 | Statusi  | ✅ Passed                                                     |
 
 ![TS](screenshots/DELETE_produkt.png)
+
 
 

@@ -101,3 +101,5 @@
 | GET | /api/orders/get_orders_details.php | Merr detajet e porosisë |
 | PUT | /api/orders/update_order.php | Përditëso statusin e porosisë |
 | DELETE | /api/orders/delete_order.php | Fshi porosinë |
+| GET | /api/clients/change_password | Ndrysho passwordin |
+
