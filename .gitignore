@@ -1,3 +1,29 @@
+<<<<<<< HEAD
 vendor/
 .env
 config_session.inc.php
+=======
+# Dependencies
+vendor/
+
+# XAMPP / Environment
+*.log
+*.sql
+
+# System files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Sensitive config files
+.env
+includes/dbh.inc.php
+includes/jwt_config.inc.php
+
+# IDE files
+.vscode/
+.idea/
+
+# PHP
+*.cache
+>>>>>>> 45bb7aa3938a52c154dfdc5286a78fbbeabff8fb
