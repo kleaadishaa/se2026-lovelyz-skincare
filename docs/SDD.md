@@ -15,42 +15,43 @@ Sistemi është i ndërtuar mbi arkitekturën e decoupling (ndarjes së plotë) 
 ## 2. Struktura e Folderave të Projektit
 Për një menaxhim sa më të pastër dhe inxhinierik, kodi është i ndarë si më poshtë:
 
+### 📂 Struktura e Projektit (Directory Tree)
+
+```text
 se2026-lovelyz-skincare/
 ├── .github/
 │   └── ISSUE_TEMPLATE/
 │       ├── bug.md
 │       └── feature.md
-├── src/                          # Gjithë kodi burimor
-│   ├── auth/                     # Autentikimi (login, signup, JWT)
-│   ├── api/                      # REST API endpoints
-│   ├── includes/                 # Konfigurime dhe lidhja me DB
-│   ├── assets/                   # CSS, imazhe dhe resurse statike
-│   ├── database/
+├── src/                          
+│   ├── auth/                     
+│   ├── api/                      
+│   ├── includes/                 
+│   ├── assets/                  
+│   ├── database/               
 │   │   └── myfirstdatabase_2_.sql
-│   ├── admin.html
-│   ├── cart.html
-│   ├── index.html
-│   ├── index.php
-│   ├── orders.html
-│   ├── profile.html
-│   └── script.js
-├── tests/                       
+│   ├── admin.html                
+│   ├── cart.html                 
+│   ├── index.html                
+│   ├── index.php               
+│   ├── orders.html               
+│   ├── profile.html             
+│   └── script.js                 
+├── tests/                        
 │   ├── login_test.php
 │   ├── signup_test.php
 │   └── cart_test.php
-├── docs/                         
-│   ├── wireframes/
-│   ├── SRS.md
-│   ├── SDD.md
-│   ├── test-report.md
-│   ├── deployment.md
-│   ├── user-manual.md
-│   ├── sprint-1-review.md
-│   └── sprint-1-retro.md
-├── .gitignore
-├── composer.json
-└── README.md
----
+├── docs/                                
+│   ├── SRS.md                    
+│   ├── SDD.md                    
+│   ├── test-report.md            
+│   ├── deployment.md             
+│   ├── user-manual.md            
+│   ├── sprint-1-review.md        
+│   └── sprint-1-retro.md       
+├── .gitignore                    
+├── composer.json                 
+└── README.md                     
 
 ## 3. Skema e Databazës (DB Schema)
 
