@@ -138,6 +138,45 @@ Sistemi duhet të funksionojë në ambient lokal përmes Apache/MySQL në XAMPP.
 
 ## 5. Use Cases / Skenarët Kryesorë të Përdorimit
 
+### UC-03 – Menaxhimi i Shportës (Cart)
+ 
+**Aktori:** Klienti
+ 
+**Përshkrimi:**  
+Klienti mund të shtojë produkte në shportë, të shikojë përmbajtjen e saj, të kryejë checkout dhe të fshijë artikuj nga shporta.
+ 
+**Main Flow:**  
+1. Klienti shfleton produktet dhe klikon "Shto në shportë".  
+2. Sistemi shton produktin në tabelën `cart` përmes `POST /api/cart/add_to_cart.php`.  
+3. Klienti hap faqen e shportës — sistemi merr artikujt përmes `GET /api/cart/get_cart.php`.  
+4. Klienti mund të fshijë një artikull përmes `DELETE /api/cart/delete_cart_item.php`.  
+5. Klienti klikon "Checkout" — sistemi krijon porosinë përmes `POST /api/cart/checkout.php` dhe pastron shportën.
+
+#### Use Case Diagram / Screenshot
+ 
+![UC-03 Screenshot](./screenshots/UC-03.png)
+### UC- 03
+
+### UC-04 – Menaxhimi i Porosive (Orders)
+ 
+**Aktori:** Klienti
+ 
+**Përshkrimi:**  
+Klienti mund të krijojë porosi, të shikojë historikun e porosive dhe detajet e tyre, si dhe të anulojë një porosi nëse statusi lejon.
+ 
+**Main Flow:**  
+1. Pas checkout-it, sistemi krijon porosinë përmes `POST /api/orders/create_order.php`.  
+2. Klienti hap faqen "Porositë e Mia" — sistemi merr të gjitha porositë përmes `GET /api/orders/get_orders.php`.  
+3. Klienti klikon një porosi për të parë detajet përmes `GET /api/orders/get_orders_details.php?order_id=X`.  
+4. Nëse statusi është `Pending`, klienti mund të anulojë porosinë përmes `PUT /api/orders/update_order.php`.  
+5. Nëse statusi është `Shipped`, butoni "Cancel" bëhet i padisponueshëm.  
+6. Klienti ose administratori mund të fshijë porosinë përmes `DELETE /api/orders/delete_order.php`.
+
+#### Use Case Diagram / Screenshot
+ 
+![UC-04 Screenshot](./screenshots/UC-04.png)
+### UC- 04
+
 ### UC-05 – Menaxhimi i Profilit dhe Sigurisë së Llogarisë
 
 **Aktori:** Klienti
