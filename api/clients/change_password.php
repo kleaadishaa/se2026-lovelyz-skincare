@@ -1,3 +1,4 @@
+// GET /api/clients/get_user - Returns authenticated user data
 <?php
 require_once '../../includes/dbh.inc.php';
 require_once '../../includes/jwt_helper.inc.php';
