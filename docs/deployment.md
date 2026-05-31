@@ -6,3 +6,5 @@
 
 3- 401 error
 <img width="910" height="93" alt="sc2" src="https://github.com/user-attachments/assets/905ff87c-47f4-4174-a7fe-7c5cd60680d8" />
+
+*Dokumentuar nga Jurgen - Sprint 2*
