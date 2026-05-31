@@ -88,8 +88,18 @@
 | GET | /api/products | Lista produkteve |
 | POST | /api/upload_product | Shto produkt |
 | DELETE | /api/delete_product | Fshi produkt |
-| POST | /api/orders | Krijo porosi |
+| POST | /api/orders/create_order.php | Krijo porosi |
 | GET | /api/clients/get_user | Merr profilin |
 | PUT | /api/clients/update_user | Përditëso profilin |
 | DELETE | /api/clients/delete_user | Fshi llogarinë |
+| PUT | /api/clients/change_password | Ndrysho passwordin |
+| POST | /api/cart/add_to_cart.php | Shto produkt në shportë |
+| GET | /api/cart/get_cart.php | Merr artikujt e shportës |
+| POST | /api/cart/checkout.php | Krijo porosinë dhe pastro shportën |
+| DELETE | /api/cart/delete_cart_item.php | Fshi artikull nga shporta |
+| GET | /api/orders/get_orders.php | Merr të gjitha porositë |
+| GET | /api/orders/get_orders_details.php | Merr detajet e porosisë |
+| PUT | /api/orders/update_order.php | Përditëso statusin e porosisë |
+| DELETE | /api/orders/delete_order.php | Fshi porosinë |
 | GET | /api/clients/change_password | Ndrysho passwordin |
+
