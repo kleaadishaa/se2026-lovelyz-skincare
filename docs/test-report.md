@@ -143,3 +143,63 @@
 | Statusi |  Passed |
 
 ![TS-04](screenshots/ts-04-delete-user.png)
+## TS-05 — Login (Autentikimi i përdoruesit)
+
+| Fusha    | Detaji                                                        |
+|----------|---------------------------------------------------------------|
+| Backend  | POST /includes/auth/login.php — Verifikon email + fjalëkalim  |
+| Frontend | Token JWT ruhet në localStorage, ridrejton tek index.html     |
+| Statusi  | ✅ Passed 
+|
+![TS-05](screenshots/Autentikimi_me_token.png)
+
+## TS-06 — Signup (Regjistrimi i përdoruesit të ri)
+
+| Fusha    | Detaji                                                        |
+|----------|---------------------------------------------------------------|
+| Backend  | POST /includes/signup.inc.php — INSERT user i ri në DB        |
+| Frontend | Ridrejton tek index.php pas regjistrimit të suksesshëm        |
+| Statusi  | ✅ Passed                                                     |
+
+
+## TS-07 — Rate Limiting
+
+| Fusha    | Detaji                                                        |
+|----------|---------------------------------------------------------------|
+| Backend  | Pas 30 kërkesave brenda 60 sekondave kthen 429                |
+| Frontend | —                                                             |
+| Statusi  | ✅ Passed   
+
+## TS-08 — GET Produktet
+
+| Fusha    | Detaji                                                        |
+|----------|---------------------------------------------------------------|
+| Backend  | GET /api/products/get_products.php — Kthen listën e produkteve|
+| Frontend | Produktet shfaqen në faqen kryesore                           |
+| Statusi  | ✅ Passed                                                     |
+
+![TS](screenshots/GET_produkt.png)
+
+## TS-09 — Upload Produkt
+
+| Fusha    | Detaji                                                        |
+|----------|---------------------------------------------------------------|
+| Backend  | POST /api/products/upload_products.php — multipart/form-data  |
+| Frontend | Admini shton produkt nga paneli, imazhi ruhet në assets/      |
+| Statusi  | ✅ Passed                                                     |
+
+![TS](screenshots/UPLOAD_produkt.png)
+
+---
+
+## TS-10 — Delete Produkt
+
+| Fusha    | Detaji                                                        |
+|----------|---------------------------------------------------------------|
+| Backend  | DELETE /api/products/delete_products.php — Fshin nga DB       |
+| Frontend | Admini zgjedh produktin dhe konfirmon fshirjen                |
+| Statusi  | ✅ Passed                                                     |
+
+![TS](screenshots/DELETE_produkt.png)
+
+
