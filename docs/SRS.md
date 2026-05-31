@@ -195,7 +195,7 @@ Përdoruesi mund të shohë, përditësojë ose fshijë të dhënat e profilit t
 ![UC-05 Screenshot](./screenshots/UC-05.png)## 5. Use cases / skenarët kryesorë të përdorimit
 ### UC- 05
 
-## UC Autentikimi (Login / Signup / Logout)
+## UC-06 Autentikimi (Login / Signup / Logout)
 **Aktori:** Visitor, User  
 **Përshkrimi:** Visitatori mund të krijojë llogari të re ose të kyçet me kredenciale ekzistuese. Pas autentikimit sistemi gjeneron një token JWT që përdoret për të aksesuar faqet e mbrojtura.
 
@@ -211,7 +211,7 @@ Përdoruesi mund të shohë, përditësojë ose fshijë të dhënat e profilit t
 
 ---
 
-## UC-02 – REST API Menaxhimi i Produkteve
+## UC-07 – REST API Menaxhimi i Produkteve
 **Aktori:** User, Admin  
 **Përshkrimi:** Useri mund të shikojë produktet e disponueshme. Admini mund të ngarkojë produkte të reja me imazh dhe të fshijë produkte ekzistuese. Të gjitha kërkeset kalojnë nëpër validim JWT dhe rate limiting.
 
