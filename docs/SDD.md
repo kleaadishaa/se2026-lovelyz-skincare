@@ -1,5 +1,94 @@
 # Software Design Document (SDD)
 
+Ky dokument përshkruan arkitekturën e sistemit, strukturën e folderave të kodit dhe skemën logjike të bazës së të dhënave (MySQL) për platformën Lovelyz Skincare.
+
+---
+
+## 1. Arkitektura e Sistemit (Client-Server Architecture)
+Sistemi është i ndërtuar mbi arkitekturën e decoupling (ndarjes së plotë) të Frontend-it nga Backend-i:
+* **Presentation Layer (Frontend):** HTML5, CSS3 (Responsive Design), dhe JavaScript (Fetch API për komunikim asinkron).
+* **Application Layer (Backend):** REST API e ndërtuar me Pure PHP, e cila menaxhon autentikimin (JWT), sigurinë (Rate Limiting) dhe logjikën e biznesit.
+* **Data Layer (Database):** MySQL për ruajtjen e të dhënave të klientëve, produkteve dhe porosive.
+
+---
+
+## 2. Struktura e Folderave të Projektit
+Për një menaxhim sa më të pastër dhe inxhinierik, kodi është i ndarë si më poshtë:
+
+se2026-lovelyz-skincare/
+├── .github/
+│   └── ISSUE_TEMPLATE/
+│       ├── bug.md
+│       └── feature.md
+├── src/                          # Gjithë kodi burimor
+│   ├── auth/                     # Autentikimi (login, signup, JWT)
+│   ├── api/                      # REST API endpoints
+│   ├── includes/                 # Konfigurime dhe lidhja me DB
+│   ├── assets/                   # CSS, imazhe dhe resurse statike
+│   ├── database/
+│   │   └── myfirstdatabase_2_.sql
+│   ├── admin.html
+│   ├── cart.html
+│   ├── index.html
+│   ├── index.php
+│   ├── orders.html
+│   ├── profile.html
+│   └── script.js
+├── tests/                       
+│   ├── login_test.php
+│   ├── signup_test.php
+│   └── cart_test.php
+├── docs/                         
+│   ├── wireframes/
+│   ├── SRS.md
+│   ├── SDD.md
+│   ├── test-report.md
+│   ├── deployment.md
+│   ├── user-manual.md
+│   ├── sprint-1-review.md
+│   └── sprint-1-retro.md
+├── .gitignore
+├── composer.json
+└── README.md
+---
+
+## 3. Skema e Databazës (DB Schema)
+
+Baza e të dhënave përbëhet nga 4 tabela kryesore të lidhura me çelësa të huaj (Foreign Keys) për të garantuar integritetin referencial:
+
+### A. Tabela: `users`
+| Kolona | Lloji (Type) | Atributet | Përshkrimi |
+| :--- | :--- | :--- | :--- |
+| `id` | INT | PRIMARY KEY, AUTO_INCREMENT | Id-ja unike e përdoruesit |
+| `name` | VARCHAR(100) | NOT NULL | Emri dhe mbiemri |
+| `email` | VARCHAR(100) | UNIQUE, NOT NULL | Email-i i përdoruesit (përdoret për login) |
+| `password` | VARCHAR(255) | NOT NULL | Fjalëkalimi i enkriptuar me `bcrypt` |
+| `role` | VARCHAR(20) | DEFAULT 'client' | Roli në sistem (`client` ose `admin`) |
+
+### B. Tabela: `products`
+| Kolona | Lloji (Type) | Atributet | Përshkrimi |
+| :--- | :--- | :--- | :--- |
+| `id` | INT | PRIMARY KEY, AUTO_INCREMENT | Id-ja unike e produktit |
+| `name` | VARCHAR(100) | NOT NULL | Emri i produktit të skincares |
+| `price` | DECIMAL(10,2) | NOT NULL | Çmimi i produktit |
+| `image_url` | VARCHAR(255) | NOT NULL | Path-i i fotos së ruajtur në server |
+
+### C. Tabela: `orders`
+| Kolona | Lloji (Type) | Atributet | Përshkrimi |
+| :--- | :--- | :--- | :--- |
+| `id` | INT | PRIMARY KEY, AUTO_INCREMENT | Id-ja unike e porosisë |
+| `user_id` | INT | FOREIGN KEY REFERENCES `users(id)` | Klienti që ka bërë porosinë |
+| `total_price` | DECIMAL(10,2) | NOT NULL | Vlera totale e porosisë |
+| `status` | VARCHAR(50) | DEFAULT 'Pending' | Statusi (`Pending`, `Shipped`, `Cancelled`) |
+| `created_at` | TIMESTAMP | DEFAULT CURRENT_TIMESTAMP | Data dhe ora e blerjes |
+
+### D. Tabela: `order_details` (Lidhja Many-to-Many mes Porosive dhe Produkteve)
+| Kolona | Lloji (Type) | Atributet | Përshkrimi |
+| :--- | :--- | :--- | :--- |
+| `id` | INT | PRIMARY KEY, AUTO_INCREMENT | Id unike e rreshtit |
+| `order_id` | INT | FOREIGN KEY REFERENCES `orders(id)` ON DELETE CASCADE | |
+| `product_id` | INT | FOREIGN KEY REFERENCES `products(id)` | |
+| `quantity` | INT | NOT NULL | Sasia e blerë për atë produkt |
 # 1. Skema e Databazës
 
 ## Tabela: users
