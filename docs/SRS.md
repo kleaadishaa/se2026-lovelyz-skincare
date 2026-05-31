@@ -195,5 +195,35 @@ Përdoruesi mund të shohë, përditësojë ose fshijë të dhënat e profilit t
 ![UC-05 Screenshot](./screenshots/UC-05.png)## 5. Use cases / skenarët kryesorë të përdorimit
 ### UC- 05
 
+## UC Autentikimi (Login / Signup / Logout)
+**Aktori:** Visitor, User  
+**Përshkrimi:** Visitatori mund të krijojë llogari të re ose të kyçet me kredenciale ekzistuese. Pas autentikimit sistemi gjeneron një token JWT që përdoret për të aksesuar faqet e mbrojtura.
+
+**Main Flow:**
+1. Visitatori plotëson formularin e regjistrimit — sistemi krijon userin në DB përmes `POST /includes/signup.inc.php`.
+2. Sistemi nis session të ri dhe ridrejton tek faqja e loginit.
+3. Useri plotëson email dhe fjalëkalim — sistemi verifikon kredencialet përmes `POST /includes/auth/login.php`.
+4. Sistemi gjeneron token JWT dhe e ruan në `localStorage` të browserit.
+5. Useri ridrejtohet tek `index.html` ose `admin.html` sipas rolit.
+6. Useri klikon "Sign Out" — sistemi fshin token-in nga `localStorage` dhe pastron session-in përmes `includes/logout.inc.php`.
+
+![UC- Screenshot](screenshots/Autentikimi.png)
+
+---
+
+## UC-02 – REST API Menaxhimi i Produkteve
+**Aktori:** User, Admin  
+**Përshkrimi:** Useri mund të shikojë produktet e disponueshme. Admini mund të ngarkojë produkte të reja me imazh dhe të fshijë produkte ekzistuese. Të gjitha kërkeset kalojnë nëpër validim JWT dhe rate limiting.
+
+**Main Flow:**
+1. Useri ose Admini dërgon kërkesë me token JWT në header `Authorization: Bearer`.
+2. Sistemi verifikon token-in përmes `validateJWT()` — nëse është i pavlefshëm kthen `401 Unauthorized`.
+3. Sistemi kontrollon rate limiting përmes `rateLimit()` — nëse kalohen 30 kërkesa në 60 sekonda kthen `429 Too Many Requests`.
+4. **GET** — Useri merr listën e produkteve përmes `GET /api/products/get_products.php` — sistemi kthen array JSON me të gjitha produktet.
+5. **POST** — Admini ngarkon produkt të ri përmes `POST /api/products/upload_products.php` me `multipart/form-data` — sistemi ruan imazhin në `assets/images/` dhe të dhënat në DB.
+6. **DELETE** — Admini fshin një produkt përmes `DELETE /api/products/delete_products.php` me `product_id` në body JSON — sistemi fshin rekordin nga DB.
+7. Sistemi kthen përgjigje JSON përmes `sendResponse()` me status kod të saktë.
+
+![UC- Screenshot](screenshots/use_cases_produkte.png)
 
 
