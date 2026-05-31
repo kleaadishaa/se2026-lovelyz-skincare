@@ -52,7 +52,7 @@ se2026-lovelyz-skincare/
 ├── .gitignore                    
 ├── composer.json                 
 └── README.md                     
-
+```
 ## 3. Skema e Databazës (DB Schema)
 
 Baza e të dhënave përbëhet nga 4 tabela kryesore të lidhura me çelësa të huaj (Foreign Keys) për të garantuar integritetin referencial:
