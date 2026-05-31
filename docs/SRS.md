@@ -2,11 +2,22 @@
 Projekti konsiston në zhvillimin e një platforme elektronike (E-commerce) të quajtur "Lovelyz Skincare". Ky aplikacion u vjen në ndihmë përdoruesve për të shfletuar dhe blerë produkte kozmetike online, si dhe menaxherëve të sistemit për të mbajtur nën kontroll inventarin dhe porositë e klientëve.
 
 ## 2. Aktorët e Sistemit (Actors)
-Sistemi mbështet dy role kryesore përdoruesish (Actors) me të drejta të ndara:
+### Klienti (Client)
 
-Klienti (Client): Përdorues i thjeshtë që regjistrohet, identifikohet, shfleton produktet, shton artikuj në shportë dhe kryen porosi.
+* Regjistrohet dhe identifikohet në sistem
+* Menaxhon profilin personal
+* Shfleton produktet
+* Shton produkte në cart
+* Kryen porosi
+* Merr asistencë nga chatbot
 
-Administratori (Admin): Përdorues me të drejta të plota që menaxhon produktet (CRUD), kontrollon listën e përdoruesve dhe ndjek statusin e porosive.
+### Administratori (Admin)
+
+* Menaxhon produktet (CRUD)
+* Menaxhon përdoruesit
+* Monitoron porositë
+* Ka akses të autorizuar në endpoint-et administrative
+
 
 ## 3. Arkitektura e Sistemit
 Sistemi bazohet në arkitekturën Klient-Server (Client-Server Architecture) dhe funksionon si më poshtë:
@@ -125,21 +136,5 @@ Ndërfaqja duhet të jetë responsive dhe funksionale si në desktop ashtu edhe 
 **NFR-SYS-01**
 Sistemi duhet të funksionojë në ambient lokal përmes Apache/MySQL në XAMPP.
 
-## 5. Aktorët e Sistemit
 
-### Klienti (Client)
-
-* Regjistrohet dhe identifikohet në sistem
-* Menaxhon profilin personal
-* Shfleton produktet
-* Shton produkte në cart
-* Kryen porosi
-* Merr asistencë nga chatbot
-
-### Administratori (Admin)
-
-* Menaxhon produktet (CRUD)
-* Menaxhon përdoruesit
-* Monitoron porositë
-* Ka akses të autorizuar në endpoint-et administrative
 
