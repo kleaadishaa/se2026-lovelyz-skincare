@@ -197,7 +197,7 @@ Përdoruesi mund të shohë, përditësojë ose fshijë të dhënat e profilit t
 
 ## UC-06 Autentikimi (Login / Signup / Logout)
 **Aktori:** Visitor, User  
-**Përshkrimi:** Visitatori mund të krijojë llogari të re ose të kyçet me kredenciale ekzistuese. Pas autentikimit sistemi gjeneron një token JWT që përdoret për të aksesuar faqet e mbrojtura.
+**Përshkrimi:** Visitor mund të krijojë llogari të re ose të kyçet me kredenciale ekzistuese. Pas autentikimit sistemi gjeneron një token JWT që përdoret për të aksesuar faqet e mbrojtura.
 
 **Main Flow:**
 1. Visitatori plotëson formularin e regjistrimit — sistemi krijon userin në DB përmes `POST /includes/signup.inc.php`.
