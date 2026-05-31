@@ -136,5 +136,25 @@ Ndërfaqja duhet të jetë responsive dhe funksionale si në desktop ashtu edhe 
 **NFR-SYS-01**
 Sistemi duhet të funksionojë në ambient lokal përmes Apache/MySQL në XAMPP.
 
+## 5. Use Cases / Skenarët Kryesorë të Përdorimit
+
+### UC-05 – Menaxhimi i Profilit dhe Sigurisë së Llogarisë
+
+**Aktori:** Klienti
+
+**Përshkrimi:**  
+Përdoruesi mund të shohë, përditësojë ose fshijë të dhënat e profilit të tij.
+
+**Main Flow:**  
+1. Përdoruesi hap faqen “Profili Im”.  
+2. Sistemi merr të dhënat e përdoruesit.  
+3. Përdoruesi ndryshon të dhënat ose password-in.  
+4. Sistemi ruan ndryshimet.
+
+#### Use Case Diagram / Screenshot
+
+![UC-05 Screenshot](./screenshots/UC-05.png)## 5. Use cases / skenarët kryesorë të përdorimit
+### UC- 05
+
 
 
