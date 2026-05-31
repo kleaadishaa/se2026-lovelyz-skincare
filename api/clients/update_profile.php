@@ -1,3 +1,4 @@
+// PUT /api/clients/update_user - Updates user profile data
 <?php
 require_once '../../includes/dbh.inc.php';
 require_once '../../includes/jwt_helper.inc.php';
