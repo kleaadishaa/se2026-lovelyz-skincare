@@ -1,0 +1,23 @@
+# Dependencies
+vendor/
+
+# XAMPP / Environment
+*.log
+*.sql
+
+# System files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Sensitive config files
+.env
+includes/dbh.inc.php
+includes/jwt_config.inc.php
+
+# IDE files
+.vscode/
+.idea/
+
+# PHP
+*.cache
