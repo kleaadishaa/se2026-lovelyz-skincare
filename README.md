@@ -4,14 +4,6 @@ Ky është një aplikacion Ueb i kompletuar për menaxhimin e porosive, produkte
 
 ---
 
-## 👥 Anëtarët e Ekipit
-* **Klea Disha** - Team Lead / Backend/ DB Management
-* **Etleva Koci** - Auth & Security / Backend
-* **Erjola Latifllari** - Backend/ AI Integration
-*  **Jurgen Tanushi** - Frontend & Integration
-
----
-
 ## 📝 Përshkrimi i Shkurtër
 Projekti konsiston në zhvillimin e një platforme elektronike (E-commerce) e cila mbështet dy role kryesore përdoruesish (Actors): **Klientët (Clients)** dhe **Administratori (Admin)**. 
 Sistemi bazohet në arkitekturën Klient-Server, ku ndërfaqja e përdoruesit (Frontend) luan rolin e klientit dhe komunikon me serverin lokal përmes protokollit HTTP (Localhost). Në prapavijë, menaxhimi i porosive, produkteve dhe përdoruesve është zhvilluar me **Pure PHP (REST API)**. 
